@@ -4,6 +4,9 @@ Version:	1.1pl1
 Release:	1
 License:	GPL
 Group:		Libraries
+Group(de):	Libraries
+Group(fr):	Librairies
+Group(pl):	Biblioteki
 Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
 Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
@@ -13,9 +16,10 @@ BuildRequires:	pwlib-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description 
-he OpenH323 project aims to create a full featured, interoperable, Open
-Source implementation of the ITU H.323 teleconferencing protocol that can be
-used by personal developers and commercial users without charge.
+he OpenH323 project aims to create a full featured, interoperable,
+Open Source implementation of the ITU H.323 teleconferencing protocol
+that can be used by personal developers and commercial users without
+charge.
 
 %package devel
 Summary:	OpenH323 development files
@@ -27,7 +31,8 @@ Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
 %description devel
-Header files and libraries for developing applications that use OpenH323.
+Header files and libraries for developing applications that use
+OpenH323.
 
 %description -l pl devel
 Pliki nag³ówkowe i biblioteki konieczne do rozwoju aplikacji
@@ -62,9 +67,11 @@ OPENH323DIR=`pwd`; export OPENH323DIR
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}/openh323,%{_bindir},%{_datadir}/misc}
 install lib/lib* $RPM_BUILD_ROOT%{_libdir}
-install openh323u.mak $RPM_BUILD_ROOT%{_datadir}/misc
 install include/*.h $RPM_BUILD_ROOT%{_includedir}/openh323
 install samples/simple/obj_linux_x86_r/simph323 $RPM_BUILD_ROOT%{_bindir}
+
+sed -e's@\$(OPENH323DIR)/include@&/openh323@' < openh323u.mak \
+			> $RPM_BUILD_ROOT%{_datadir}/misc/openh323u.mak
 
 %clean
 rm -rf $RPM_BUILD_ROOT
