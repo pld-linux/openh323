@@ -17,12 +17,15 @@ diff -urN openh323.org/configure.in openh323/configure.in
 diff -urN openh323.org/openh323u.mak.in openh323/openh323u.mak.in
 --- openh323.org/openh323u.mak.in	2004-03-18 01:01:15.135219736 +0100
 +++ openh323/openh323u.mak.in	2004-03-18 01:02:03.699836792 +0100
-@@ -141,6 +141,7 @@
+@@ -141,6 +141,9 @@
  #
  
  PWLIBDIR	= @PWLIBDIR@
+-OPENH323DIR	= @OPENH323DIR@
 +PWLIBMAKEDIR	= @PWLIBDIR@/share/pwlib/make
- OPENH323DIR	= @OPENH323DIR@
++ifndef OPENH323DIR
++OPENH323DIR	= /usr
++endif
  STDCCFLAGS	+= @STDCCFLAGS@
  LDFLAGS		+= @LDFLAGS@
 @@ -151,12 +152,12 @@
