@@ -63,15 +63,24 @@ Biblioteki statyczne OpenH323.
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
 OPENH323DIR=`pwd`; export OPENH323DIR
-%{__make} both OPTCCFLAGS="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}"
+OPENH323_BUILD="yes"; export OPENH323_BUILD
+%{__make} %{?debug:debugshared}%{!?debug:optshared} \
+		OPTCCFLAGS="%{!?debug:$RPM_OPT_FLAGS}"
+%{__make} %{?debug:debugnoshared}%{!?debug:optnoshared} \
+		OPTCCFLAGS="%{!?debug:$RPM_OPT_FLAGS}"
+
+cd samples/simple
+%{__make} %{?debug:debugshared}%{!?debug:optshared} \
+		OPTCCFLAGS="%{!?debug:$RPM_OPT_FLAGS}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}/openh323,%{_bindir},%{_datadir}/misc}
 
-install lib/lib* $RPM_BUILD_ROOT%{_libdir}
+#using cp as install won't preserve links
+cp -d lib/lib* $RPM_BUILD_ROOT%{_libdir}
 install include/*.h $RPM_BUILD_ROOT%{_includedir}/openh323
-#install samples/simple/obj_linux_x86_r/simph323 $RPM_BUILD_ROOT%{_bindir}
+install samples/simple/obj_linux_x86_?/simph323 $RPM_BUILD_ROOT%{_bindir}
 
 sed -e's@\$(OPENH323DIR)/include@&/openh323@' < openh323u.mak \
 	> $RPM_BUILD_ROOT%{_datadir}/misc/openh323u.mak
@@ -86,7 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
