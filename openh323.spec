@@ -5,8 +5,12 @@ Release:	1
 License:	MPL
 Group:		Libraries
 Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	Библиотеки
+Group(uk):	Б╕бл╕отеки
 Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
 Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
@@ -14,7 +18,7 @@ Patch2:		%{name}-no_samples.patch
 URL:		http://www.openh323.org/
 BuildRequires:	pwlib-devel
 BuildRequires:	libstdc++-devel
-BuildConflicts: openh323-devel
+BuildConflicts:	openh323-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description 
@@ -28,8 +32,12 @@ Summary:	OpenH323 development files
 Summary(pl):	Pliki dla developerСw OpenH323
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 Requires:	libstdc++-devel
 
@@ -46,8 +54,12 @@ Summary:	OpenH323 static libraries
 Summary(pl):	Biblioteki statyczne OpenH323
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -69,13 +81,13 @@ OPENH323_BUILD="yes"; export OPENH323_BUILD
 touch src/asnparser.version
 
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
-		OPTCCFLAGS="%{!?debug:$RPM_OPT_FLAGS}"
+		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 %{__make} -C src %{?debug:debugnoshared}%{!?debug:optnoshared} \
-		OPTCCFLAGS="%{!?debug:$RPM_OPT_FLAGS}"
+		OPTCCFLAGS="%{rpmcflags}"
 
 cd samples/simple
 %{__make} %{?debug:debugshared}%{!?debug:optshared} \
-	OPTCCFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}"
+	OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -100,7 +112,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
