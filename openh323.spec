@@ -17,7 +17,7 @@ Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
 URL:		http://www.openh323.org/
-BuildRequires:	pwlib-devel
+BuildRequires:	pwlib-devel >= 1.2.9
 BuildRequires:	libstdc++-devel
 BuildConflicts:	openh323-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
