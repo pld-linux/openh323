@@ -1,7 +1,8 @@
+
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.10.0
+Version:	1.10.3
 Release:	1
 License:	MPL
 Group:		Libraries
@@ -10,9 +11,8 @@ Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
 Patch3:		%{name}-lib.patch
-Patch4:		%{name}-speex.patch
 URL:		http://www.openh323.org/
-BuildRequires:	pwlib-devel >= 1.4.0
+BuildRequires:	pwlib-devel >= 1.4.3
 BuildRequires:	Speex-devel >= 0.8.1
 BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -64,7 +64,6 @@ Biblioteki statyczne OpenH323.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p0
-%patch4 -p1
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
@@ -87,6 +86,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}/openh323,%{_bindir},%{_data
 #using cp as install won't preserve links
 cp -d lib/lib* $RPM_BUILD_ROOT%{_libdir}
 install include/*.h $RPM_BUILD_ROOT%{_includedir}/openh323
+install version.h $RPM_BUILD_ROOT%{_includedir}/openh323
 #install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
 
 sed -e's@\$(OPENH323DIR)/include@&/openh323@' < openh323u.mak \
