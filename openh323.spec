@@ -46,6 +46,7 @@ Group(ru):	Разработка/Библиотеки
 Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 Requires:	libstdc++-devel
+Requires:	pwlib-devel
 
 %description devel
 Header files and libraries for developing applications that use
