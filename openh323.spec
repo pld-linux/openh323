@@ -15,7 +15,6 @@ Source0:	http://www.seconix.com/%{name}-%{version}.tar.gz
 # Source0-md5:	f9d25921281843fd2304da494b2e04e2
 Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
-#Patch2:		%{name}-no_samples.patch
 Patch2:		%{name}-lib.patch
 Patch3:		%{name}-system-libs.patch
 Patch4:		%{name}-ffmpeg.patch
