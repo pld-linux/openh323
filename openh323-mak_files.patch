@@ -29,7 +29,7 @@ diff -urN openh323.orig/openh323u.mak openh323/openh323u.mak
  
  $(TARGET) :	$(OH323_LIBDIR)/$(OH323_FILE)
  
-+ifdef OPENH323_BULD
++ifdef OPENH323_BUILD
  ifndef LIBRARY_MAKEFILE
  ifdef DEBUG
  $(OH323_LIBDIR)/$(OH323_FILE):

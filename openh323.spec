@@ -1,10 +1,10 @@
-
+# TODO: use more shared libraries (speex, maybe gsm,lpc10,vic)
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.11.2
+Version:	1.11.7
 Release:	1
-License:	MPL
+License:	MPL 1.0
 Group:		Libraries
 Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
 Patch0:		%{name}-mak_files.patch
@@ -12,8 +12,8 @@ Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
 Patch3:		%{name}-lib.patch
 URL:		http://www.openh323.org/
-BuildRequires:	pwlib-devel >= 1.4.7
-BuildRequires:	speex-devel >= 1.0.0
+BuildRequires:	pwlib-devel >= 1.4.11
+#BuildRequires:	speex-devel >= 1.0.0
 BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %requires_eq	pwlib
@@ -73,11 +73,11 @@ touch src/asnparser.version
 
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
 		CC=%{__cc} CPLUS=%{__cxx} \
-		OPTCCFLAGS="%{rpmcflags}" 
+		OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}" 
 
 #%%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
 #		CC=%{__cc} CPLUS=%{__cxx} \
-#		OPTCCFLAGS="%{rpmcflags}" 
+#		OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}" 
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -100,12 +100,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc *.txt
 #%attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%doc *.txt
 %attr(755,root,root) %{_libdir}/*.so
 %{_includedir}/*
 %{_datadir}/misc/*
