@@ -1,13 +1,9 @@
-
-# TODO: update mak_files patch to define OPENH323DIR=/usr instead of inside
-#       builddir (needed for openh323-dependent apps)
-
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.13.4
 %define	fver	%(echo %{version} | tr . _)
-Release:	1.1
+Release:	2
 License:	MPL 1.0
 Group:		Libraries
 #Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
