@@ -1,5 +1,5 @@
---- openh323/configure.in.orig	2003-09-03 22:18:11.000000000 +0200
-+++ openh323/configure.in	2003-09-03 22:19:44.977214368 +0200
+--- openh323/configure.ac.orig	2003-09-03 22:18:11.000000000 +0200
++++ openh323/configure.ac	2003-09-03 22:19:44.977214368 +0200
 @@ -45,25 +45,15 @@
    AC_CHECK_FILE(${PWLIBDIR}/version.h, HAS_PTLIB=1)
  fi

@@ -1,22 +1,22 @@
-diff -urN openh323.org/configure.in openh323/configure.in
---- openh323.org/configure.in	2004-03-18 01:01:15.115222776 +0100
-+++ openh323/configure.in	2004-03-18 01:01:22.654076696 +0100
-@@ -83,12 +83,6 @@
+--- openh323-1.15.3/configure.ac.orig	2004-11-26 09:47:00.000000000 +0100
++++ openh323-1.15.3/configure.ac	2005-03-25 21:42:25.686673392 +0100
+@@ -85,13 +85,6 @@
    PWLIBDIR=`$PTLIB_CONFIG --prefix`
  fi
  
 -if test "x$PWLIBDIR" = "x/usr" -o "x$PWLIBDIR" = "x/usr/"; then
 -  PWLIBDIR="/usr/share/pwlib/"
 -fi
--if test "xPWLIBDIR" = "x/usr/local" -o "x$PWLIBDIR" = "x/usr/"; then
+-if test "x$PWLIBDIR" = "x/usr/local" -o "x$PWLIBDIR" = "x/usr/"; then
 -  PWLIBDIR="/usr/local/share/pwlib/"
 -fi
- 
+-
  echo "PWLib prefix set to.... $PWLIBDIR"
  
---- openh323/openh323u.mak.in.orig	2004-02-26 13:08:55.000000000 +0100
-+++ openh323/openh323u.mak.in	2004-04-04 00:46:06.388317876 +0200
-@@ -141,9 +141,11 @@
+ AC_SUBST(PWLIBDIR)
+--- openh323-1.15.3/openh323u.mak.in.orig	2004-06-10 15:16:30.000000000 +0200
++++ openh323-1.15.3/openh323u.mak.in	2005-03-25 21:43:00.532376040 +0100
+@@ -157,9 +157,11 @@
  #
  
  PWLIBDIR	= @PWLIBDIR@
@@ -29,15 +29,15 @@ diff -urN openh323.org/configure.in openh323/configure.in
 -LDFLAGS		+= @LDFLAGS@
  ENDLDLIBS	:= @ENDLDLIBS@ $(ENDLDLIBS)
  
- H323_AVCODEC	  = @H323_AVCODEC@
-@@ -151,12 +153,12 @@
- H323_SYSTEM_SPEEX = @H323_SYSTEM_SPEEX@
+ H323_AVCODEC	     = @H323_AVCODEC@
+@@ -170,12 +172,12 @@
+ NOTRACE	             = @NOTRACE@
  
  ifdef LIBRARY_MAKEFILE
 -include $(PWLIBDIR)/make/unix.mak
 +include $(PWLIBMAKEDIR)/unix.mak
  else
- ifdef NOTRACE
+ ifeq ($(NOTRACE), 1)
  OBJDIR_SUFFIX := n
  endif
 -include $(PWLIBDIR)/make/ptlib.mak
@@ -45,7 +45,7 @@ diff -urN openh323.org/configure.in openh323/configure.in
  endif
  
  LIBDIRS += $(OPENH323DIR)
-@@ -170,7 +172,7 @@
+@@ -189,7 +191,7 @@
  OH323_INCDIR = $(OPENH323DIR)/include
  endif
  ifndef OH323_LIBDIR
@@ -53,17 +53,17 @@ diff -urN openh323.org/configure.in openh323/configure.in
 +OH323_LIBDIR = $(subst $(PWLIBDIR),$(OPENH323DIR),$(PW_LIBDIR))
  endif
  
- ifdef NOTRACE
-@@ -190,7 +192,7 @@
- STDCCFLAGS += -DNO_H323_VIDEO
- endif
+ ifeq ($(NOTRACE), 1)
+@@ -209,7 +211,7 @@
+ #STDCCFLAGS += -DNO_H323_VIDEO
+ #endif
  
 -OH323_BASE  = h323_$(PLATFORM_TYPE)_$(OH323_SUFFIX)$(LIB_TYPE)
 +OH323_BASE  = openh323
  OH323_FILE  = lib$(OH323_BASE).$(LIB_SUFFIX)
  
  LDFLAGS	    += -L$(OH323_LIBDIR)
-@@ -283,6 +285,7 @@
+@@ -302,6 +304,7 @@
  
  $(TARGET) :	$(OH323_LIBDIR)/$(OH323_FILE)
  
@@ -71,7 +71,7 @@ diff -urN openh323.org/configure.in openh323/configure.in
  ifndef LIBRARY_MAKEFILE
  ifdef DEBUG
  $(OH323_LIBDIR)/$(OH323_FILE):
-@@ -292,6 +295,7 @@
+@@ -311,6 +314,7 @@
  	$(MAKE) -C $(OH323_SRCDIR) opt
  endif
  endif
@@ -100,3 +100,25 @@ diff -urN openh323.org/src/Makefile openh323/src/Makefile
  
  ####################################################
  
+--- openh323-1.15.3/Makefile.in.orig	2004-11-27 19:42:15.000000000 +0100
++++ openh323-1.15.3/Makefile.in	2005-03-26 00:21:43.147718464 +0100
+@@ -331,15 +331,13 @@
+ 
+ install:
+ 	mkdir -p $(DESTDIR)$(LIBDIR)
+-	rm -f $(DESTDIR)$(LIBDIR)/libh323_*_r.so*
+-	$(INSTALL) -m 444 lib/*_r.so $(DESTDIR)$(LIBDIR)
+-	(for fn in lib/*_r.so.* ; do \
++	rm -f $(DESTDIR)$(LIBDIR)/libopenh323*.so*
++	$(INSTALL) lib/*.so.*.*.* $(DESTDIR)$(LIBDIR)
++	(for fn in lib/*.so ; do \
+ 		cd $(DESTDIR)$(LIBDIR) ; \
+ 		rm -f `basename $$fn` ; \
+-		ln -s libh323_*_r.so `basename $$fn` ; \
++		ln -s libopenh323.so.*.*.* `basename $$fn` ; \
+ 	done)
+-	$(INSTALL) -m 444 lib/$(OH323_FILE) $(DESTDIR)$(LIBDIR)
+-	( cd $(DESTDIR)$(LIBDIR); rm libopenh323.so ; ln -s $(OH323_FILE) libopenh323.so)
+ 	( for dir in $(DESTDIR)$(LIBDIR) \
+ 		     $(DESTDIR)$(PREFIX)/include/openh323 \
+ 		     $(DESTDIR)$(PREFIX)/share/openh323 ;\
