@@ -15,16 +15,17 @@ BuildRequires:	libstdc++-devel
 BuildConflicts:	openh323-devel < %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%description 
+%description
 The OpenH323 project aims to create a full featured, interoperable,
 Open Source implementation of the ITU H.323 teleconferencing protocol
 that can be used by personal developers and commercial users without
 charge.
 
 %description -l pl
-Celem projektu OpenH323 jest stworzenie w pe³ni funkcjonalnej i 
-wyposa¿onej implementacji protoko³u telekonferencyjnego ITU H.323, który
-mo¿e byæ u¿ywany przez u¿ytkowników prywatnych i komercyjnych bez op³at.
+Celem projektu OpenH323 jest stworzenie w pe³ni funkcjonalnej i
+wyposa¿onej implementacji protoko³u telekonferencyjnego ITU H.323,
+który mo¿e byæ u¿ywany przez u¿ytkowników prywatnych i komercyjnych
+bez op³at.
 
 %package devel
 Summary:	OpenH323 development files
@@ -38,7 +39,7 @@ Requires:	pwlib-devel
 Header files and libraries for developing applications that use
 OpenH323.
 
-%description -l pl devel
+%description devel -l pl
 Pliki nag³ówkowe i biblioteki konieczne do rozwoju aplikacji
 u¿ywaj±cych OpenH323.
 
@@ -51,7 +52,7 @@ Requires:	%{name}-devel = %{version}
 %description static
 OpenH323 static libraries.
 
-%description -l pl static
+%description static -l pl
 Biblioteki statyczne OpenH323.
 
 %prep
