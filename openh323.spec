@@ -1,22 +1,25 @@
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.11.7
+Version:	1.12.0
 Release:	1
 License:	MPL 1.0
 Group:		Libraries
 Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
-# Source0-md5:	369449dcca5e30ebd3b94e57995b544f
+# Source0-md5:	f7932f0a17d6afafc7332036a4b5d392
 Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
 Patch3:		%{name}-lib.patch
 Patch4:		%{name}-system-libs.patch
+Patch5:		%{name}-ffmpeg.patch
 URL:		http://www.openh323.org/
+BuildRequires:	autoconf
+BuildRequires:	ffmpeg-devel >= 0.4.6
 BuildRequires:	libgsm-devel >= 1.0.10
 BuildRequires:	libstdc++-devel
 BuildRequires:	lpc10-devel >= 1.5
-BuildRequires:	pwlib-devel >= 1.4.11
+BuildRequires:	pwlib-devel >= 1.5.0
 BuildRequires:	speex-devel >= 1.0
 %requires_eq	pwlib
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -38,7 +41,7 @@ Summary:	OpenH323 development files
 Summary(pl):	Pliki dla developerów OpenH323
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
-Requires:	libstdc++-devel
+Requires:	ffmpeg-devel
 Requires:	pwlib-devel
 
 %description devel
@@ -68,12 +71,15 @@ Biblioteki statyczne OpenH323.
 %patch2 -p1
 %patch3 -p0
 %patch4 -p1
+%patch5 -p1
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
 OPENH323DIR=`pwd`; export OPENH323DIR
 OPENH323_BUILD="yes"; export OPENH323_BUILD
 touch src/asnparser.version
+%{__autoconf}
+%configure
 
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
 		CC=%{__cc} CPLUS=%{__cxx} \
@@ -85,16 +91,16 @@ touch src/asnparser.version
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}/openh323,%{_bindir},%{_datadir}/misc}
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}/openh323,%{_bindir},%{_datadir}/openh323}
 
-#using cp as install won't preserve links
+# using cp as install won't preserve links
 cp -d lib/lib* $RPM_BUILD_ROOT%{_libdir}
 install include/*.h $RPM_BUILD_ROOT%{_includedir}/openh323
 install version.h $RPM_BUILD_ROOT%{_includedir}/openh323
 #install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
 
 sed -e's@\$(OPENH323DIR)/include@&/openh323@' < openh323u.mak \
-	> $RPM_BUILD_ROOT%{_datadir}/misc/openh323u.mak
+	> $RPM_BUILD_ROOT%{_datadir}/openh323/openh323u.mak
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -112,7 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/*.so
 %{_includedir}/*
-%{_datadir}/misc/*
+%{_datadir}/openh323
 
 %files static
 %defattr(644,root,root,755)

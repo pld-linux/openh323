@@ -1,0 +1,54 @@
+--- openh323/configure.in.orig	2003-07-13 00:19:30.000000000 +0200
++++ openh323/configure.in	2003-07-13 00:28:34.000000000 +0200
+@@ -86,12 +86,18 @@
+ 
+ AC_CHECK_HEADERS(avcodec.h, H323_AVCODEC=1)
+ if test "${H323_AVCODEC:-unset}" != "unset" ; then
+-  AC_CHECK_LIB(avcodec, ldap_open, H323_AVCODEC=1, H323_AVCODEC=)
++  AC_CHECK_LIB(avcodec, avcodec_open, H323_AVCODEC=1, H323_AVCODEC=)
+ else
+-  AC_CHECK_FILE(/usr/local/include/ffmpeg/avcodec.h, H323_AVCODEC=1)
++  AC_CHECK_FILE(/usr/include/ffmpeg/avcodec.h, H323_AVCODEC=1)
+   if test "${H323_AVCODEC:-unset}" != "unset" ; then
+-    AVCODECINCLUDEDIR=/usr/local/include/ffmpeg
+-    AVCODECLIBDIR=/usr/local/lib
++    AVCODECINCLUDEDIR=/usr/include
++    AVCODECLIBDIR=/usr/lib
++  else
++    AC_CHECK_FILE(/usr/local/include/ffmpeg/avcodec.h, H323_AVCODEC=1)
++    if test "${H323_AVCODEC:-unset}" != "unset" ; then
++      AVCODECINCLUDEDIR=/usr/local/include
++      AVCODECLIBDIR=/usr/local/lib
++    fi
+   fi
+ fi
+ 
+--- openh323/src/h263codec.cxx.orig	2003-06-06 08:32:08.000000000 +0200
++++ openh323/src/h263codec.cxx	2003-07-13 01:10:23.000000000 +0200
+@@ -109,7 +109,7 @@
+ #include "rtp.h"
+ 
+ extern "C" {
+-#include <avcodec.h>
++#include <ffmpeg/avcodec.h>
+ };
+ 
+ 
+@@ -368,7 +368,7 @@
+ 
+ //////////////////////////////////////////////////////////////////////////////
+ 
+-#if PTRACING 
++#if 0
+ 
+ extern "C" {
+   extern void (*avcodec_fprintf_fn)(char *);
+@@ -409,7 +409,7 @@
+     register_avcodec(&h263p_encoder);
+     register_avcodec(&h263_decoder);
+ 
+-#if PTRACING
++#if 0
+     avcodec_fprintf_fn = &h263_printon;
+ #endif
+   }

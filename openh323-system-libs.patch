@@ -85,7 +85,7 @@
  
  # G.729 codec (not available on Unix yet!)
  
-@@ -570,42 +503,8 @@
+@@ -570,43 +503,8 @@
  HEADER_FILES	+= $(OH323_INCDIR)/speexcodec.h
  COMMON_SOURCES	+= $(OH323_SRCDIR)/speexcodec.cxx
  
@@ -120,6 +120,7 @@
 -		   $(SPEEX_SRCDIR)/exc_5_256_table.c \
 -		   $(SPEEX_SRCDIR)/exc_5_64_table.c \
 -		   $(SPEEX_SRCDIR)/exc_8_128_table.c \
+-		   $(SPEEX_SRCDIR)/exc_20_32_table.c \
 -		   $(SPEEX_SRCDIR)/exc_10_32_table.c \
 -		   $(SPEEX_SRCDIR)/exc_10_16_table.c \
 -		   $(SPEEX_SRCDIR)/hexc_10_32_table.c \
