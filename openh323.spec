@@ -71,7 +71,7 @@ OPENH323_BUILD="yes"; export OPENH323_BUILD
 
 cd samples/simple
 %{__make} %{?debug:debugshared}%{!?debug:optshared} \
-		OPTCCFLAGS="%{!?debug:$RPM_OPT_FLAGS}"
+	OPTCCFLAGS="%{!?debug:$RPM_OPT_FLAGS}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -80,7 +80,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}/openh323,%{_bindir},%{_data
 #using cp as install won't preserve links
 cp -d lib/lib* $RPM_BUILD_ROOT%{_libdir}
 install include/*.h $RPM_BUILD_ROOT%{_includedir}/openh323
-install samples/simple/obj_linux_x86_?/simph323 $RPM_BUILD_ROOT%{_bindir}
+install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
 
 sed -e's@\$(OPENH323DIR)/include@&/openh323@' < openh323u.mak \
 	> $RPM_BUILD_ROOT%{_datadir}/misc/openh323u.mak
