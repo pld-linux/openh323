@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_with	speex11		# use speex 1.1.x
+#
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
@@ -16,7 +20,7 @@ Patch3:		%{name}-lib.patch
 Patch4:		%{name}-system-libs.patch
 Patch5:		%{name}-ffmpeg.patch
 Patch6:		%{name}-configure_fix.patch
-#Patch7:		%{name}-speex.patch
+Patch7:		%{name}-speex.patch
 URL:		http://www.openh323.org/
 BuildRequires:	autoconf
 BuildRequires:	ffmpeg-devel >= 0.4.6
@@ -24,9 +28,12 @@ BuildRequires:	libgsm-devel >= 1.0.10
 BuildRequires:	libstdc++-devel
 BuildRequires:	lpc10-devel >= 1.5
 BuildRequires:	pwlib-devel >= 1.6.6
-BuildRequires:	speex-devel >= 1:1.0.3
+%{!?with_speex11:BuildRequires:	speex-devel >= 1:1.0.3}
+%{!?with_speex11:BuildRequires:	speex-devel < 1:1.1.0}
+%{?with_speex11:BuildRequires:	speex-devel >= 1:1.1.0}
 %requires_eq	pwlib
 Requires:	pwlib >= 1.6.6
+%{?with_speex11:Requires:	speex >= 1:1.1.0}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -78,7 +85,7 @@ Biblioteki statyczne OpenH323.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-#%patch7 -p1
+%{?with_speex11:%patch7 -p1}
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
