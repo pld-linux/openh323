@@ -1,4 +1,3 @@
-# TODO: use more shared libraries (speex, maybe gsm,lpc10,vic)
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
@@ -11,12 +10,15 @@ Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
 Patch3:		%{name}-lib.patch
+Patch4:		%{name}-system-libs.patch
 URL:		http://www.openh323.org/
-BuildRequires:	pwlib-devel >= 1.4.11
-#BuildRequires:	speex-devel >= 1.0.0
+BuildRequires:	libgsm-devel >= 1.0.10
 BuildRequires:	libstdc++-devel
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRequires:	lpc10-devel >= 1.5
+BuildRequires:	pwlib-devel >= 1.4.11
+BuildRequires:	speex-devel >= 1.0
 %requires_eq	pwlib
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The OpenH323 project aims to create a full featured, interoperable,
@@ -64,6 +66,7 @@ Biblioteki statyczne OpenH323.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p0
+%patch4 -p1
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR

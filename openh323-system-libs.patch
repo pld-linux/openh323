@@ -1,0 +1,173 @@
+--- openh323/src/Makefile.orig	2003-04-18 10:57:05.000000000 +0200
++++ openh323/src/Makefile	2003-04-18 23:20:26.000000000 +0200
+@@ -459,34 +459,7 @@
+ HEADER_FILES	+= $(OH323_INCDIR)/gsmcodec.h
+ COMMON_SOURCES	+= $(OH323_SRCDIR)/gsmcodec.cxx
+ 
+-GSM_DIR 	= gsm
+-GSM_SRCDIR	= $(GSM_DIR)/src
+-GSM_INCDIR	= $(GSM_DIR)/inc
+-
+-HEADER_FILES	+= $(GSM_INCDIR)/gsm.h \
+-                   $(GSM_INCDIR)/config.h \
+-                   $(GSM_INCDIR)/private.h \
+-                   $(GSM_INCDIR)/proto.h \
+-                   $(GSM_INCDIR)/unproto.h \
+-                   $(GSM_DIR)/README \
+-                   $(GSM_DIR)/COPYRIGHT \
+-                   $(GSM_DIR)/PART_OF_TOAST
+-
+-COMMON_SOURCES	+= $(GSM_SRCDIR)/gsm_create.c \
+-                   $(GSM_SRCDIR)/gsm_destroy.c \
+-		   $(GSM_SRCDIR)/gsm_decode.c \
+-                   $(GSM_SRCDIR)/gsm_encode.c \
+-                   $(GSM_SRCDIR)/gsm_option.c \
+-		   $(GSM_SRCDIR)/code.c \
+-                   $(GSM_SRCDIR)/decode.c \
+-                   $(GSM_SRCDIR)/add.c \
+-		   $(GSM_SRCDIR)/gsm_lpc.c \
+-                   $(GSM_SRCDIR)/rpe.c \
+-                   $(GSM_SRCDIR)/preprocess.c \
+-                   $(GSM_SRCDIR)/long_term.c \
+-                   $(GSM_SRCDIR)/short_term.c \
+-                   $(GSM_SRCDIR)/table.c
+-
++EXTLIBS += -lgsm
+ 
+ # Microsoft GSM and ADPCM
+ 
+@@ -516,47 +489,7 @@
+ HEADER_FILES	+= $(OH323_INCDIR)/lpc10codec.h
+ COMMON_SOURCES	+= $(OH323_SRCDIR)/lpc10codec.cxx
+ 
+-LPC10_DIR 	= lpc10
+-LPC10_INCDIR	= $(LPC10_DIR)
+-LPC10_SRCDIR	= $(LPC10_DIR)/src
+-
+-HEADER_FILES	+= $(LPC10_INCDIR)/lpc10.h
+-
+-COMMON_SOURCES	+= $(LPC10_SRCDIR)/f2clib.c \
+-		   $(LPC10_SRCDIR)/analys.c \
+-		   $(LPC10_SRCDIR)/bsynz.c \
+-		   $(LPC10_SRCDIR)/chanwr.c \
+-		   $(LPC10_SRCDIR)/dcbias.c \
+-		   $(LPC10_SRCDIR)/decode_.c \
+-		   $(LPC10_SRCDIR)/deemp.c \
+-		   $(LPC10_SRCDIR)/difmag.c \
+-		   $(LPC10_SRCDIR)/dyptrk.c \
+-		   $(LPC10_SRCDIR)/encode_.c \
+-		   $(LPC10_SRCDIR)/energy.c \
+-		   $(LPC10_SRCDIR)/ham84.c \
+-		   $(LPC10_SRCDIR)/hp100.c \
+-		   $(LPC10_SRCDIR)/invert.c \
+-		   $(LPC10_SRCDIR)/irc2pc.c \
+-		   $(LPC10_SRCDIR)/ivfilt.c \
+-		   $(LPC10_SRCDIR)/lpcdec.c \
+-		   $(LPC10_SRCDIR)/lpcenc.c \
+-		   $(LPC10_SRCDIR)/lpcini.c \
+-		   $(LPC10_SRCDIR)/lpfilt.c \
+-		   $(LPC10_SRCDIR)/median.c \
+-		   $(LPC10_SRCDIR)/mload.c \
+-		   $(LPC10_SRCDIR)/onset.c \
+-		   $(LPC10_SRCDIR)/pitsyn.c \
+-		   $(LPC10_SRCDIR)/placea.c \
+-		   $(LPC10_SRCDIR)/placev.c \
+-		   $(LPC10_SRCDIR)/preemp.c \
+-		   $(LPC10_SRCDIR)/prepro.c \
+-		   $(LPC10_SRCDIR)/random.c \
+-		   $(LPC10_SRCDIR)/rcchk.c \
+-		   $(LPC10_SRCDIR)/synths.c \
+-		   $(LPC10_SRCDIR)/tbdm.c \
+-		   $(LPC10_SRCDIR)/voicin.c \
+-		   $(LPC10_SRCDIR)/vparms.c \
+-
++EXTLIBS += -llpc10
+ 
+ # G.729 codec (not available on Unix yet!)
+ 
+@@ -570,42 +503,8 @@
+ HEADER_FILES	+= $(OH323_INCDIR)/speexcodec.h
+ COMMON_SOURCES	+= $(OH323_SRCDIR)/speexcodec.cxx
+ 
++EXTLIBS += -lspeex
+ 
+-SPEEX_DIR 	= speex
+-SPEEX_INCDIR	= $(SPEEX_DIR)/libspeex
+-SPEEX_SRCDIR	= $(SPEEX_DIR)/libspeex
+-
+-HEADER_FILES	+= $(SPEEX_INCDIR)/speex.h \
+-		   $(SPEEX_INCDIR)/speex_bits.h \
+-		   $(SPEEX_INCDIR)/speex_header.h \
+-		   $(SPEEX_INCDIR)/speex_callbacks.h
+-
+-COMMON_SOURCES	+= $(SPEEX_SRCDIR)/nb_celp.c \
+-		   $(SPEEX_SRCDIR)/sb_celp.c \
+-		   $(SPEEX_SRCDIR)/lpc.c \
+-		   $(SPEEX_SRCDIR)/ltp.c \
+-		   $(SPEEX_SRCDIR)/lsp.c \
+-		   $(SPEEX_SRCDIR)/quant_lsp.c \
+-		   $(SPEEX_SRCDIR)/lsp_tables_nb.c \
+-		   $(SPEEX_SRCDIR)/gain_table.c \
+-		   $(SPEEX_SRCDIR)/gain_table_lbr.c \
+-		   $(SPEEX_SRCDIR)/cb_search.c \
+-		   $(SPEEX_SRCDIR)/filters.c \
+-		   $(SPEEX_SRCDIR)/bits.c \
+-		   $(SPEEX_SRCDIR)/modes.c \
+-		   $(SPEEX_SRCDIR)/vq.c \
+-		   $(SPEEX_SRCDIR)/high_lsp_tables.c \
+-		   $(SPEEX_SRCDIR)/vbr.c \
+-		   $(SPEEX_SRCDIR)/hexc_table.c \
+-		   $(SPEEX_SRCDIR)/exc_5_256_table.c \
+-		   $(SPEEX_SRCDIR)/exc_5_64_table.c \
+-		   $(SPEEX_SRCDIR)/exc_8_128_table.c \
+-		   $(SPEEX_SRCDIR)/exc_10_32_table.c \
+-		   $(SPEEX_SRCDIR)/exc_10_16_table.c \
+-		   $(SPEEX_SRCDIR)/hexc_10_32_table.c \
+-		   $(SPEEX_SRCDIR)/misc.c \
+-		   $(SPEEX_SRCDIR)/speex_header.c \
+-		   $(SPEEX_SRCDIR)/speex_callbacks.c
+ endif
+ 
+ ifeq ($(ENDIAN),PBIG_ENDIAN)
+@@ -764,6 +663,8 @@
+ # When linking the shared version of the openh323 library under BeOS,
+ # pwlib must be in the list of external libraries
+ SYSLIBS        += -L$(PW_LIBDIR) -l$(PTLIB_BASE)$(LIB_TYPE)
++else
++EXTLIBS	+= -l$(PTLIB_BASE)$(LIB_TYPE)
+ endif
+ 
+ LIB_BASENAME=$(OH323_BASE)
+--- openh323/src/gsmcodec.cxx.orig	2002-08-05 12:03:47.000000000 +0200
++++ openh323/src/gsmcodec.cxx	2003-04-18 23:32:17.000000000 +0200
+@@ -107,7 +107,7 @@
+ #include "rtp.h"
+ 
+ extern "C" {
+-#include "gsm/inc/gsm.h"
++#include <gsm.h>
+ };
+ 
+ 
+--- openh323/src/lpc10codec.cxx.orig	2002-09-03 08:01:16.000000000 +0200
++++ openh323/src/lpc10codec.cxx	2003-04-18 23:33:00.000000000 +0200
+@@ -67,7 +67,7 @@
+ #include "rtp.h"
+ 
+ extern "C" {
+-#include "lpc10/lpc10.h"
++#include <lpc10.h>
+ };
+ 
+ 
+--- openh323/src/speexcodec.cxx.orig	2002-12-08 23:59:41.000000000 +0100
++++ openh323/src/speexcodec.cxx	2003-04-18 23:33:22.000000000 +0200
+@@ -105,7 +105,7 @@
+ #include "rtp.h"
+ 
+ extern "C" {
+-#include "speex/libspeex/speex.h"
++#include <speex.h>
+ };
+ 
+ 
