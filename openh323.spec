@@ -14,6 +14,7 @@ Patch3:		%{name}-lib.patch
 URL:		http://www.openh323.org/
 BuildRequires:	pwlib-devel >= 1.4.3
 BuildRequires:	Speex-devel >= 0.8.1
+BuildRequires:  openldap-devel
 BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %requires_eq	pwlib
