@@ -1,7 +1,7 @@
 Summary:	OpenH323 Library
 Name:		openh323
 Version:	1.1pl1
-Release:	2
+Release:	3
 License:	MPL
 Group:		Libraries
 Group(de):	Libraries
@@ -13,6 +13,7 @@ Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
 URL:		http://www.openh323.org/
 BuildRequires:	pwlib-devel
+BuildRequires:	libstdc++-devel
 #BuildRequires:	pwlib-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -30,6 +31,7 @@ Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
+Requires:	libstdc++-devel
 
 %description devel
 Header files and libraries for developing applications that use
