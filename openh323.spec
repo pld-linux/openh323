@@ -9,7 +9,7 @@ Summary(pl):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.15.3
 %define	fver	%(echo %{version} | tr . _)
-Release:	0.1
+Release:	0.2
 License:	MPL 1.0
 Group:		Libraries
 #Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
@@ -140,12 +140,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.txt
 #%attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%attr(755,root,root) %{_libdir}/libh*.so.*.*.*
+%attr(755,root,root) %{_libdir}/libh*.so
 %attr(755,root,root) %{_libdir}/pwlib/codecs/audio/*_pwplugin.so
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/libo*.so
 %{_includedir}/*
 %{_datadir}/openh323
 
