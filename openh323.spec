@@ -92,8 +92,6 @@ install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
 sed -e's@\$(OPENH323DIR)/include@&/openh323@' < openh323u.mak \
 	> $RPM_BUILD_ROOT%{_datadir}/misc/openh323u.mak
 
-gzip -9nf *.txt
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -107,7 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc *.gz
+%doc *.txt
 %attr(755,root,root) %{_libdir}/*.so
 %{_includedir}/*
 %{_datadir}/misc/*
