@@ -51,15 +51,6 @@ diff -urN openh323.org/openh323u.mak openh323/openh323u.mak
 diff -urN openh323.org/src/Makefile openh323/src/Makefile
 --- openh323.org/src/Makefile	Tue Jan  8 02:24:43 2002
 +++ openh323/src/Makefile	Tue Jan  8 02:25:05 2002
-@@ -210,7 +210,7 @@
- PWLIBDIR=$(HOME)/pwlib
- endif
- 
--include $(PWLIBDIR)/make/unix.mak
-+include $(PWLIBDIR)/share/pwlib/unix.mak
- 
- ifndef OPENH323DIR
- OPENH323DIR=$(HOME)/openh323
 @@ -497,7 +497,7 @@
  
  ####################################################
