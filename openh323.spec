@@ -1,7 +1,7 @@
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.6.1
+Version:	1.7.8
 Release:	1
 License:	MPL
 Group:		Libraries
@@ -90,9 +90,7 @@ touch src/asnparser.version
 		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 %{__make} -C src %{?debug:debugnoshared}%{!?debug:optnoshared} \
 		OPTCCFLAGS="%{rpmcflags}"
-
-cd samples/simple
-%{__make} %{?debug:debugshared}%{!?debug:optshared} \
+%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
 	OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 
 %install
