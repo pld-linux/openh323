@@ -1,18 +1,33 @@
+
+%define _snap 20040124
+%define _snapver 01
+
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.8.2
-Release:	1
-License:	MPL
+Version:	1.13.1
+Release:	0.%{_snap}.1
+License:	MPL 1.0
 Group:		Libraries
-Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
+Source0:	http://snapshots.seconix.com/cvs/archive/%{name}-cvs_%{_snap}-%{_snapver}.tar.gz
+# Source0-md5:	655fe0ffeea09be6bafa8fb0fc023a78
 Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
+Patch3:		%{name}-lib.patch
+Patch4:		%{name}-system-libs.patch
+Patch5:		%{name}-ffmpeg.patch
+Patch6:		%{name}-configure_fix.patch
+Patch7:		%{name}-speex-float-sint-conv.patch
 URL:		http://www.openh323.org/
-BuildRequires:	pwlib-devel >= 1.2.13
+BuildRequires:	autoconf
+BuildRequires:	ffmpeg-devel >= 0.4.6
+BuildRequires:	libgsm-devel >= 1.0.10
 BuildRequires:	libstdc++-devel
-BuildConflicts:	openh323-devel < %{version}
+BuildRequires:	lpc10-devel >= 1.5
+BuildRequires:	pwlib-devel >= 1.5.0
+BuildRequires:	speex-devel >= 1.0
+%requires_eq	pwlib
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -32,7 +47,7 @@ Summary:	OpenH323 development files
 Summary(pl):	Pliki dla developerów OpenH323
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
-Requires:	libstdc++-devel
+Requires:	ffmpeg-devel
 Requires:	pwlib-devel
 
 %description devel
@@ -60,38 +75,43 @@ Biblioteki statyczne OpenH323.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p0
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p0
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
 OPENH323DIR=`pwd`; export OPENH323DIR
 OPENH323_BUILD="yes"; export OPENH323_BUILD
 touch src/asnparser.version
+%{__autoconf}
+%configure
 
-#-D__DEPRECATED -D_GLIBCPP_DEPRECATED -fpermissive
 
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
-		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti" 
-#		CC="gcc2" CPP="g++2" CPLUS="g++2"
-%{__make} -C src %{?debug:debugnoshared}%{!?debug:optnoshared} \
-		OPTCCFLAGS="%{rpmcflags}" 
-#		CC="gcc2" CPP="g++2" CPLUS="g++2"
-%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
-		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti" 
-#		CC="gcc2" CPP="g++2" CPLUS="g++2"
+	CC=%{__cc} \
+	CPLUS=%{__cxx} \
+	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
+
+#%%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
+#	CC=%{__cc} \
+#	CPLUS=%{__cxx} \
+#	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}/openh323,%{_bindir},%{_datadir}/misc}
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}/openh323,%{_bindir},%{_datadir}/openh323}
 
-#using cp as install won't preserve links
+# using cp as install won't preserve links
 cp -d lib/lib* $RPM_BUILD_ROOT%{_libdir}
 install include/*.h $RPM_BUILD_ROOT%{_includedir}/openh323
-install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
+install version.h $RPM_BUILD_ROOT%{_includedir}/openh323
+#install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
 
 sed -e's@\$(OPENH323DIR)/include@&/openh323@' < openh323u.mak \
-	> $RPM_BUILD_ROOT%{_datadir}/misc/openh323u.mak
-
-gzip -9nf *.txt
+	> $RPM_BUILD_ROOT%{_datadir}/openh323/openh323u.mak
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -101,16 +121,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
+%doc *.txt
+#%attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%doc *.gz
-%attr(755,root,root) %{_libdir}/*.so
+%attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/*
-%{_datadir}/misc/*
+%{_datadir}/openh323
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/*.a
+%{_libdir}/lib*.a
