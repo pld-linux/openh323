@@ -13,7 +13,6 @@ Patch3:		%{name}-lib.patch
 URL:		http://www.openh323.org/
 BuildRequires:	pwlib-devel >= 1.2.19
 BuildRequires:	libstdc++-devel
-# BuildConflicts:	openh323-devel < %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -68,7 +67,6 @@ PWLIBDIR=%{_prefix}; export PWLIBDIR
 OPENH323DIR=`pwd`; export OPENH323DIR
 OPENH323_BUILD="yes"; export OPENH323_BUILD
 touch src/asnparser.version
-
 
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
 		CC=%{__cc} CPLUS=%{__cxx} \
