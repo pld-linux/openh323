@@ -1,6 +1,6 @@
 diff -durN openh323.orig/Makefile openh323/Makefile
 --- openh323.orig/Makefile	Thu May 17 02:01:06 2001
-+++ openh323/Makefile	Wed Jul  4 20:20:48 2001
++++ openh323/Makefile	Thu Aug  9 10:48:23 2001
 @@ -214,7 +214,7 @@
  all :: bothdepend both
  
@@ -12,7 +12,7 @@ diff -durN openh323.orig/Makefile openh323/Makefile
  # Pass through commands to the subdirectory for sample app
 diff -durN openh323.orig/openh323u.mak openh323/openh323u.mak
 --- openh323.orig/openh323u.mak	Wed May 16 09:35:10 2001
-+++ openh323/openh323u.mak	Wed Jul  4 20:20:16 2001
++++ openh323/openh323u.mak	Thu Aug  9 10:48:23 2001
 @@ -53,7 +53,7 @@
  OBJDIR_SUFFIX := n
  endif
@@ -49,9 +49,9 @@ diff -durN openh323.orig/openh323u.mak openh323/openh323u.mak
  # End of file
  
 diff -durN openh323.orig/src/Makefile openh323/src/Makefile
---- openh323.orig/src/Makefile	Mon Jun 18 09:44:21 2001
-+++ openh323/src/Makefile	Wed Jul  4 20:20:17 2001
-@@ -172,7 +172,7 @@
+--- openh323.orig/src/Makefile	Sat Jun 30 08:50:22 2001
++++ openh323/src/Makefile	Thu Aug  9 10:49:12 2001
+@@ -175,7 +175,7 @@
  PWLIBDIR=$(HOME)/pwlib
  endif
  
@@ -60,7 +60,7 @@ diff -durN openh323.orig/src/Makefile openh323/src/Makefile
  
  ifndef OPENH323DIR
  OPENH323DIR=$(HOME)/openh323
-@@ -419,13 +419,13 @@
+@@ -422,7 +422,7 @@
  
  ####################################################
  
@@ -68,6 +68,8 @@ diff -durN openh323.orig/src/Makefile openh323/src/Makefile
 +include $(PWLIBDIR)/share/pwlib/common.mak
  
  ####################################################
+ 
+@@ -434,7 +434,7 @@
  
  LIB_BASENAME	=	$(OH323_FILE)
  
