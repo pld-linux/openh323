@@ -17,10 +17,11 @@ diff -u -r openh323.orig/configure.in openh323/configure.in
 diff -u -r openh323.orig/openh323u.mak.in openh323/openh323u.mak.in
 --- openh323.orig/openh323u.mak.in	2004-01-02 02:23:13.000000000 +0100
 +++ openh323/openh323u.mak.in	2004-01-26 06:03:49.000000000 +0100
-@@ -135,6 +135,7 @@
+@@ -135,7 +135,8 @@
  #
  
  PWLIBDIR	= @PWLIBDIR@
+ OPENH323DIR	= @OPENH323DIR@
 +PWLIBMAKEDIR  = @PWLIBDIR@/share/pwlib/make
  STDCCFLAGS	+= @STDCCFLAGS@
  LDFLAGS		+= @LDFLAGS@
