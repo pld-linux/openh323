@@ -1,9 +1,6 @@
 # TODO:
 # - separate plugins to subpackages
 #
-# Conditional build:
-%bcond_with	speex11		# use speex 1.1.x
-#
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
@@ -16,25 +13,25 @@ Group:		Libraries
 #Source0:	http://dl.sourceforge.net/openh323/%{name}-v%{fver}-src-tar.gz
 Source0:	http://www.seconix.com/%{name}-%{version}.tar.gz
 # Source0-md5:	f9d25921281843fd2304da494b2e04e2
-#Patch0:		%{name}-mak_files.patch
-#Patch1:		%{name}-asnparser.patch
+Patch0:		%{name}-mak_files.patch
+Patch1:		%{name}-asnparser.patch
 #Patch2:		%{name}-no_samples.patch
-#Patch3:		%{name}-lib.patch
-#Patch4:		%{name}-system-libs.patch (needs changes)
-#Patch5:		%{name}-ffmpeg.patch
-#Patch6:		%{name}-configure_fix.patch
-#Patch7:		%{name}-speex.patch
+Patch2:		%{name}-lib.patch
+Patch3:		%{name}-system-libs.patch
+Patch4:		%{name}-ffmpeg.patch
+Patch5:		%{name}-configure_fix.patch
 URL:		http://www.openh323.org/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	ffmpeg-devel >= 0.4.6
 BuildRequires:	libgsm-devel >= 1.0.10
 BuildRequires:	libstdc++-devel
 BuildRequires:	lpc10-devel >= 1.5
 BuildRequires:	pwlib-devel >= 1.8.4
-BuildRequires:	speex-devel >= 1:1.1.0
+BuildRequires:	sed >= 4.0
+BuildRequires:	speex-devel >= 1:1.1.5
 %requires_eq	pwlib
 Requires:	pwlib >= 1.8.4
-Requires:	speex >= 1:1.1.0
+Requires:	speex >= 1:1.1.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -79,39 +76,31 @@ Biblioteki statyczne OpenH323.
 
 %prep
 %setup -q
-#%patch0 -p1
-#%patch1 -p1
-#%patch2 -p1
-#%patch3 -p0
-#%patch4 -p1
-#%patch5 -p1
-#%patch6 -p1
-#%{?with_speex11:%patch7 -p1}
+%patch0 -p1
+%patch1 -p1
+%patch2 -p0
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 %build
-#PWLIBDIR=%{_prefix}; export PWLIBDIR
-#OPENH323DIR=`pwd`; export OPENH323DIR
-#OPENH323_BUILD="yes"; export OPENH323_BUILD
-#touch src/asnparser.version
+PWLIBDIR=%{_prefix}; export PWLIBDIR
+OPENH323DIR=`pwd`; export OPENH323DIR
+OPENH323_BUILD="yes"; export OPENH323_BUILD
 %{__autoconf}
 %configure \
 	--enable-localspeex=no \
 	--enable-plugins
 
-%{__make} \
-	optshared \
-	OPTCCFLAGS="%{rpmcflags}"
+%{__make} %{?debug:debugshared}%{!?debug:optshared} \
+	CC="%{__cc}" \
+	CPLUS="%{__cxx}" \
+	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
 
-# -C src %{?debug:debugshared}%{!?debug:optshared} \
-#	CC=%{__cc} \
-#	CPLUS=%{__cxx} \
-#	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}" \
-#	OH323_LIBDIR="`pwd`/lib"
-
-#%%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
-#	CC=%{__cc} \
-#	CPLUS=%{__cxx} \
-#	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
+%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
+	CC=%{__cc} \
+	CPLUS=%{__cxx} \
+	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -123,12 +112,9 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir}}
 	
 # using cp as install won't preserve links
 cp -d lib/lib*.a $RPM_BUILD_ROOT%{_libdir}
-#install include/*.h $RPM_BUILD_ROOT%{_includedir}/openh323
-#install version.h $RPM_BUILD_ROOT%{_includedir}/openh323
-#install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
+install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
 
-#sed -e's@\$(OPENH323DIR)/include@&/openh323@' < openh323u.mak \
-#	> $RPM_BUILD_ROOT%{_datadir}/openh323/openh323u.mak
+sed -i -e 's@\$(OPENH323DIR)/include@&/openh323@' $RPM_BUILD_ROOT%{_datadir}/openh323/openh323u.mak
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -139,17 +125,18 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc *.txt
-#%attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/libh*.so.*.*.*
-%attr(755,root,root) %{_libdir}/libh*.so
+%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/libopenh323.so.*.*.*
+%dir %{_libdir}/pwlib/codecs
+%dir %{_libdir}/pwlib/codecs/audio
 %attr(755,root,root) %{_libdir}/pwlib/codecs/audio/*_pwplugin.so
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libo*.so
-%{_includedir}/*
+%attr(755,root,root) %{_libdir}/libopenh323.so
+%{_includedir}/openh323
 %{_datadir}/openh323
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libopenh323.a
