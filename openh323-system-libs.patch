@@ -1,6 +1,31 @@
---- openh323/src/Makefile.orig	2003-04-18 10:57:05.000000000 +0200
-+++ openh323/src/Makefile	2003-04-18 23:20:26.000000000 +0200
-@@ -459,34 +459,7 @@
+diff -urN openh323.org/src/gsmcodec.cxx openh323/src/gsmcodec.cxx
+--- openh323.org/src/gsmcodec.cxx	2004-03-18 01:01:15.431174744 +0100
++++ openh323/src/gsmcodec.cxx	2004-03-18 01:03:01.005125064 +0100
+@@ -107,7 +107,7 @@
+ #include "rtp.h"
+ 
+ extern "C" {
+-#include "gsm/inc/gsm.h"
++#include <gsm.h>
+ };
+ 
+ 
+diff -urN openh323.org/src/lpc10codec.cxx openh323/src/lpc10codec.cxx
+--- openh323.org/src/lpc10codec.cxx	2004-03-18 01:01:15.459170488 +0100
++++ openh323/src/lpc10codec.cxx	2004-03-18 01:03:01.008124608 +0100
+@@ -73,7 +73,7 @@
+ #include "rtp.h"
+ 
+ extern "C" {
+-#include "lpc10/lpc10.h"
++#include <lpc10.h>
+ };
+ 
+ 
+diff -urN openh323.org/src/Makefile openh323/src/Makefile
+--- openh323.org/src/Makefile	2004-03-18 01:01:15.309193288 +0100
++++ openh323/src/Makefile	2004-03-18 01:04:55.391735656 +0100
+@@ -517,34 +517,7 @@
  HEADER_FILES	+= $(OH323_INCDIR)/gsmcodec.h
  COMMON_SOURCES	+= $(OH323_SRCDIR)/gsmcodec.cxx
  
@@ -36,7 +61,7 @@
  
  # Microsoft GSM and ADPCM
  
-@@ -516,47 +489,7 @@
+@@ -574,47 +547,7 @@
  HEADER_FILES	+= $(OH323_INCDIR)/lpc10codec.h
  COMMON_SOURCES	+= $(OH323_SRCDIR)/lpc10codec.cxx
  
@@ -83,14 +108,13 @@
 -
 +EXTLIBS += -llpc10
  
- # G.729 codec (not available on Unix yet!)
+ # iLBC
  
-@@ -570,43 +503,8 @@
+@@ -684,44 +617,8 @@
  HEADER_FILES	+= $(OH323_INCDIR)/speexcodec.h
  COMMON_SOURCES	+= $(OH323_SRCDIR)/speexcodec.cxx
  
-+EXTLIBS += -lspeex
- 
+-ifndef H323_SYSTEM_SPEEX
 -SPEEX_DIR 	= speex
 -SPEEX_INCDIR	= $(SPEEX_DIR)/libspeex
 -SPEEX_SRCDIR	= $(SPEEX_DIR)/libspeex
@@ -127,39 +151,9 @@
 -		   $(SPEEX_SRCDIR)/misc.c \
 -		   $(SPEEX_SRCDIR)/speex_header.c \
 -		   $(SPEEX_SRCDIR)/speex_callbacks.c
+-endif
++EXTLIBS += -lspeex
++
  endif
  
  ifeq ($(ENDIAN),PBIG_ENDIAN)
---- openh323/src/gsmcodec.cxx.orig	2002-08-05 12:03:47.000000000 +0200
-+++ openh323/src/gsmcodec.cxx	2003-04-18 23:32:17.000000000 +0200
-@@ -107,7 +107,7 @@
- #include "rtp.h"
- 
- extern "C" {
--#include "gsm/inc/gsm.h"
-+#include <gsm.h>
- };
- 
- 
---- openh323/src/lpc10codec.cxx.orig	2002-09-03 08:01:16.000000000 +0200
-+++ openh323/src/lpc10codec.cxx	2003-04-18 23:33:00.000000000 +0200
-@@ -67,7 +67,7 @@
- #include "rtp.h"
- 
- extern "C" {
--#include "lpc10/lpc10.h"
-+#include <lpc10.h>
- };
- 
- 
---- openh323/src/speexcodec.cxx.orig	2002-12-08 23:59:41.000000000 +0100
-+++ openh323/src/speexcodec.cxx	2003-04-18 23:33:22.000000000 +0200
-@@ -105,7 +105,7 @@
- #include "rtp.h"
- 
- extern "C" {
--#include "speex/libspeex/speex.h"
-+#include <speex.h>
- };
- 
- 
