@@ -3,7 +3,7 @@ Summary(pl):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.13.4
 %define	fver	%(echo %{version} | tr . _)
-Release:	3
+Release:	4
 License:	MPL 1.0
 Group:		Libraries
 #Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
@@ -16,7 +16,7 @@ Patch3:		%{name}-lib.patch
 Patch4:		%{name}-system-libs.patch
 Patch5:		%{name}-ffmpeg.patch
 Patch6:		%{name}-configure_fix.patch
-Patch7:		%{name}-speex.patch
+#Patch7:		%{name}-speex.patch
 URL:		http://www.openh323.org/
 BuildRequires:	autoconf
 BuildRequires:	ffmpeg-devel >= 0.4.6
@@ -24,7 +24,7 @@ BuildRequires:	libgsm-devel >= 1.0.10
 BuildRequires:	libstdc++-devel
 BuildRequires:	lpc10-devel >= 1.5
 BuildRequires:	pwlib-devel >= 1.6.5-3
-BuildRequires:	speex-devel >= 1.0
+BuildRequires:	speex-devel >= 1:1.0.3
 %requires_eq	pwlib
 Requires:	pwlib >= 1.6.5-3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -78,7 +78,7 @@ Biblioteki statyczne OpenH323.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-%patch7 -p1
+#%patch7 -p1
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
