@@ -1,7 +1,7 @@
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.7.10
+Version:	1.8.2
 Release:	1
 License:	MPL
 Group:		Libraries
@@ -10,7 +10,7 @@ Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
 URL:		http://www.openh323.org/
-BuildRequires:	pwlib-devel >= 1.2.9
+BuildRequires:	pwlib-devel >= 1.2.13
 BuildRequires:	libstdc++-devel
 BuildConflicts:	openh323-devel < %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -67,12 +67,17 @@ OPENH323DIR=`pwd`; export OPENH323DIR
 OPENH323_BUILD="yes"; export OPENH323_BUILD
 touch src/asnparser.version
 
+#-D__DEPRECATED -D_GLIBCPP_DEPRECATED -fpermissive
+
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
-		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
+		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti" 
+#		CC="gcc2" CPP="g++2" CPLUS="g++2"
 %{__make} -C src %{?debug:debugnoshared}%{!?debug:optnoshared} \
-		OPTCCFLAGS="%{rpmcflags}"
+		OPTCCFLAGS="%{rpmcflags}" 
+#		CC="gcc2" CPP="g++2" CPLUS="g++2"
 %{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
-	OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
+		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti" 
+#		CC="gcc2" CPP="g++2" CPLUS="g++2"
 
 %install
 rm -rf $RPM_BUILD_ROOT
