@@ -1,7 +1,7 @@
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.9.8
+Version:	1.9.9
 Release:	1
 License:	MPL
 Group:		Libraries
@@ -10,8 +10,9 @@ Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
 Patch3:		%{name}-lib.patch
+Patch4:		%{name}-glibc.patch
 URL:		http://www.openh323.org/
-BuildRequires:	pwlib-devel >= 1.3.8
+BuildRequires:	pwlib-devel >= 1.3.10
 BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -61,6 +62,7 @@ Biblioteki statyczne OpenH323.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p0
+%patch4 -p1
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
@@ -70,15 +72,11 @@ touch src/asnparser.version
 
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
 		CC=%{__cc} CPLUS=%{__cxx} \
-		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti" 
+		OPTCCFLAGS="%{rpmcflags}" 
 
-%{__make} -C src %{?debug:debugnoshared}%{!?debug:optnoshared} \
-		CC=%{__cc} CPLUS=%{__cxx} \
-		OPTCCFLAGS="%{rpmcflags}"
-		
-%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
-		CC=%{__cc} CPLUS=%{__cxx} \
-		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti" 
+#%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
+#		CC=%{__cc} CPLUS=%{__cxx} \
+#		OPTCCFLAGS="%{rpmcflags}" 
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -87,7 +85,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}/openh323,%{_bindir},%{_data
 #using cp as install won't preserve links
 cp -d lib/lib* $RPM_BUILD_ROOT%{_libdir}
 install include/*.h $RPM_BUILD_ROOT%{_includedir}/openh323
-install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
+#install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
 
 sed -e's@\$(OPENH323DIR)/include@&/openh323@' < openh323u.mak \
 	> $RPM_BUILD_ROOT%{_datadir}/misc/openh323u.mak
@@ -100,7 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
+#%attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 
 %files devel
