@@ -3,7 +3,7 @@ Name:		openh323
 Version:	1.1pl1
 Release:	1
 License:	GPL
-Group:		X11/Libraries
+Group:		Libraries
 Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
 Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
