@@ -1,7 +1,7 @@
 Summary:	OpenH323 Library
 Name:		openh323
 Version:	1.1pl1
-Release:	1
+Release:	2
 License:	MPL
 Group:		Libraries
 Group(de):	Libraries
