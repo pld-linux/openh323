@@ -16,6 +16,7 @@ Patch3:		%{name}-lib.patch
 Patch4:		%{name}-system-libs.patch
 Patch5:		%{name}-ffmpeg.patch
 Patch6:		%{name}-configure_fix.patch
+Patch7:		%{name}-speex.patch
 URL:		http://www.openh323.org/
 BuildRequires:	autoconf
 BuildRequires:	ffmpeg-devel >= 0.4.6
@@ -76,6 +77,7 @@ Biblioteki statyczne OpenH323.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
