@@ -69,12 +69,15 @@ touch src/asnparser.version
 
 
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
+		CC=%{__cc} CPLUS=%{__cxx} \
 		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti" 
 
 %{__make} -C src %{?debug:debugnoshared}%{!?debug:optnoshared} \
+		CC=%{__cc} CPLUS=%{__cxx} \
 		OPTCCFLAGS="%{rpmcflags}"
 		
 %{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
+		CC=%{__cc} CPLUS=%{__cxx} \
 		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti" 
 
 %install
