@@ -1,0 +1,11 @@
+--- openh323u.mak.in.orig	Mon Jun 10 02:45:03 2002
++++ openh323u.mak.in	Mon Jun 10 02:45:52 2002
+@@ -112,7 +112,7 @@
+ OH323_BASE  = openh323
+ OH323_FILE  = lib$(OH323_BASE).$(LIB_SUFFIX)
+ 
+-LDFLAGS	    += -L$(OH323_LIBDIR)
++LDFLAGS	    := -L$(OH323_LIBDIR) $(LDFLAGS)
+ LDLIBS	    := -l$(OH323_BASE) $(LDLIBS)
+ 
+ STDCCFLAGS  += -I$(OH323_INCDIR)

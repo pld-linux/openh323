@@ -1,0 +1,39 @@
+--- openh323/configure.in.orig	2003-09-03 22:08:12.708455216 +0200
++++ openh323/configure.in	2003-09-03 22:10:29.414672712 +0200
+@@ -80,21 +80,21 @@
+ 
+ dnl MSWIN ffmpeg AVCODEC Library,avcodec,H323_AVCODEC,1,@H323_AVCODEC_DIR@,avcodec.h,,..\ffmpeg\libavcodec\,..\external\ffmpeg\libavcodec\,\ffmpeg\libavcodec\,c:\ffmpeg\libavcodec\
+ 
+-AC_CHECK_HEADERS(avcodec.h, H323_AVCODEC=1)
++AC_CHECK_HEADERS(ffmpeg/avcodec.h, H323_AVCODEC=1)
+ 
+ if test "${H323_AVCODEC:-unset}" != "unset" ; then
+   AC_CHECK_LIB(avcodec, avcodec_open, H323_AVCODEC=1, H323_AVCODEC=)
+ fi
+ 
+ if test "${H323_AVCODEC:-unset}" != "unset" ; then
+-  AC_CHECK_FILE(/usr/local/include/ffmpeg/avcodec.h, H323_AVCODEC=1)
++  AC_CHECK_FILE(/usr/include/ffmpeg/avcodec.h, H323_AVCODEC=1)
+ fi
+ 
+ if test "${H323_AVCODEC:-unset}" != "unset" ; then
+   AC_SUBST(H323_AVCODEC, 1)
+   AC_DEFINE(H323_AVCODEC, 1, "ffmpeg based avodec found")
+-  AVCODECINCLUDEDIR=/usr/local/include/ffmpeg
+-  AVCODECLIBDIR=/usr/local/lib
++  AVCODECINCLUDEDIR=/usr/include
++  AVCODECLIBDIR=/usr/lib
+   STDCCFLAGS="$STDCCFLAGS -I${AVCODECINCLUDEDIR}"
+ 
+   echo  "                      H263 codec on FFmpeg library  enabled"
+--- openh323/src/ffh263codec.cxx.orig	2003-06-06 08:32:08.000000000 +0200
++++ openh323/src/ffh263codec.cxx	2003-07-13 01:10:23.000000000 +0200
+@@ -109,7 +109,7 @@
+ #include "rtp.h"
+ 
+ extern "C" {
+-#include <avcodec.h>
++#include <ffmpeg/avcodec.h>
+ };
+ 
+ 
