@@ -1,33 +1,45 @@
-diff -durN openh323.orig/openh323u.mak openh323/openh323u.mak
---- openh323.orig/openh323u.mak	Mon Oct 30 01:23:56 2000
-+++ openh323/openh323u.mak	Thu Jan 11 10:20:46 2001
-@@ -32,7 +32,7 @@
- endif
+diff -durN openh323.orig/Makefile openh323/Makefile
+--- openh323.orig/Makefile	Thu May 17 02:01:06 2001
++++ openh323/Makefile	Wed Jul  4 20:20:48 2001
+@@ -214,7 +214,7 @@
+ all :: bothdepend both
  
- ifndef PWLIB_FILE
+ 
+-include $(PWLIBDIR)/make/ptlib.mak
++include $(PWLIBDIR)/share/pwlib/ptlib.mak
+ 
+ 
+ # Pass through commands to the subdirectory for sample app
+diff -durN openh323.orig/openh323u.mak openh323/openh323u.mak
+--- openh323.orig/openh323u.mak	Wed May 16 09:35:10 2001
++++ openh323/openh323u.mak	Wed Jul  4 20:20:16 2001
+@@ -53,7 +53,7 @@
+ OBJDIR_SUFFIX := n
+ endif
+ endif
 -include $(PWLIBDIR)/make/ptlib.mak
 +include $(PWLIBDIR)/share/pwlib/ptlib.mak
  endif
  
  
-@@ -41,7 +41,7 @@
- OH323_LIBDIR = $(OPENH323DIR)/lib
- OH323_OBJDIR = $(OH323_LIBDIR)/$(PT_OBJBASE)
+@@ -75,7 +75,7 @@
+ endif
  
--OH323_BASE  = h323_$(PLATFORM_TYPE)_$(OBJ_SUFFIX)
+ 
+-OH323_BASE  = h323_$(PLATFORM_TYPE)_$(OH323_SUFFIX)
 +OH323_BASE  = h323
  OH323_FILE  = lib$(OH323_BASE)$(LIB_TYPE).$(LIB_SUFFIX)
  
  LDFLAGS	    += -L$(OH323_LIBDIR)
-@@ -95,6 +95,7 @@
+@@ -115,6 +115,7 @@
  
- $(OBJS) :	$(OH323_LIBDIR)/$(OH323_FILE)
+ $(TARGET) :	$(OH323_LIBDIR)/$(OH323_FILE)
  
 +ifdef OPENH323_BUILD
- ifndef OD323_LIBRARY_MAKEFILE
+ ifndef OH323_LIBRARY_MAKEFILE
  ifdef DEBUG
  $(OH323_LIBDIR)/$(OH323_FILE):
-@@ -104,7 +105,7 @@
+@@ -124,7 +125,7 @@
  	$(MAKE) -C $(OH323_SRCDIR) opt
  endif
  endif
@@ -37,9 +49,9 @@ diff -durN openh323.orig/openh323u.mak openh323/openh323u.mak
  # End of file
  
 diff -durN openh323.orig/src/Makefile openh323/src/Makefile
---- openh323.orig/src/Makefile	Thu Jan 11 10:19:02 2001
-+++ openh323/src/Makefile	Thu Jan 11 10:19:27 2001
-@@ -110,7 +110,7 @@
+--- openh323.orig/src/Makefile	Mon Jun 18 09:44:21 2001
++++ openh323/src/Makefile	Wed Jul  4 20:20:17 2001
+@@ -172,7 +172,7 @@
  PWLIBDIR=$(HOME)/pwlib
  endif
  
@@ -48,7 +60,7 @@ diff -durN openh323.orig/src/Makefile openh323/src/Makefile
  
  ifndef OPENH323DIR
  OPENH323DIR=$(HOME)/openh323
-@@ -330,13 +330,13 @@
+@@ -419,13 +419,13 @@
  
  ####################################################
  
