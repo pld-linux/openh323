@@ -1,0 +1,18 @@
+diff -durN openh323.orig/src/Makefile openh323/src/Makefile
+--- openh323.orig/src/Makefile	Thu Jan  4 11:31:02 2001
++++ openh323/src/Makefile	Thu Jan  4 11:33:44 2001
+@@ -342,13 +342,12 @@
+ 
+ # Build the .cxx files from the .asn files
+ 
++ASNPARSE = $(PWLIBDIR)/bin/asnparser 
+ ifdef ASN_EXCLUDE
+ ASNPARSE_DIR = $(PWLIBDIR)/tools/asnparser.new
+-ASNPARSE = $(ASNPARSE_DIR)/obj_$(PLATFORM_TYPE)_r/asnparser 
+ ASNPARSE += -x $(ASN_EXCLUDE)
+ else
+ ASNPARSE_DIR = $(PWLIBDIR)/tools/asnparser
+-ASNPARSE = $(ASNPARSE_DIR)/obj_$(PLATFORM_TYPE)_r/asnparser 
+ endif
+ 
+ #### h245

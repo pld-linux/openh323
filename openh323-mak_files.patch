@@ -1,0 +1,40 @@
+diff -durN openh323.orig/openh323u.mak openh323/openh323u.mak
+--- openh323.orig/openh323u.mak	Mon Oct 30 01:23:56 2000
++++ openh323/openh323u.mak	Thu Jan  4 13:03:50 2001
+@@ -32,7 +32,7 @@
+ endif
+ 
+ ifndef PWLIB_FILE
+-include $(PWLIBDIR)/make/ptlib.mak
++include $(PWLIBDIR)/share/pwlib/ptlib.mak
+ endif
+ 
+
+diff -durN openh323.orig/src/Makefile openh323/src/Makefile
+--- openh323.orig/src/Makefile	Mon Oct 30 01:24:28 2000
++++ openh323/src/Makefile	Thu Jan  4 11:29:55 2001
+@@ -110,7 +110,7 @@
+ PWLIBDIR=$(HOME)/pwlib
+ endif
+ 
+-include $(PWLIBDIR)/make/unix.mak
++include $(PWLIBDIR)/share/pwlib/unix.mak
+ 
+ ifndef OPENH323DIR
+ OPENH323DIR=$(HOME)/openh323
+@@ -330,13 +330,13 @@
+ 
+ ####################################################
+ 
+-include $(PWLIBDIR)/make/common.mak
++include $(PWLIBDIR)/share/pwlib/common.mak
+ 
+ ####################################################
+ 
+ LIB_BASENAME	=	$(OH323_FILE)
+ 
+-include $(PWLIBDIR)/make/lib.mak
++include $(PWLIBDIR)/share/pwlib/lib.mak
+ 
+ ####################################################
+ 
