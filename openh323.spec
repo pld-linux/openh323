@@ -2,7 +2,7 @@ Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.8.2
-Release:	1.1
+Release:	2
 License:	MPL
 Group:		Libraries
 Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
@@ -67,17 +67,15 @@ OPENH323DIR=`pwd`; export OPENH323DIR
 OPENH323_BUILD="yes"; export OPENH323_BUILD
 touch src/asnparser.version
 
-#-D__DEPRECATED -D_GLIBCPP_DEPRECATED -fpermissive
 
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
 		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti" 
-#		CC="gcc2" CPP="g++2" CPLUS="g++2"
+
 %{__make} -C src %{?debug:debugnoshared}%{!?debug:optnoshared} \
-		OPTCCFLAGS="%{rpmcflags}" 
-#		CC="gcc2" CPP="g++2" CPLUS="g++2"
+		OPTCCFLAGS="%{rpmcflags}"
+		
 %{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
 		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti" 
-#		CC="gcc2" CPP="g++2" CPLUS="g++2"
 
 %install
 rm -rf $RPM_BUILD_ROOT
