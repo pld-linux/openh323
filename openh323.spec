@@ -1,8 +1,8 @@
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.8.8
-Release:	2
+Version:	1.9.2
+Release:	1
 License:	MPL
 Group:		Libraries
 Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
@@ -11,7 +11,7 @@ Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
 Patch3:		%{name}-lib.patch
 URL:		http://www.openh323.org/
-BuildRequires:	pwlib-devel >= 1.2.19
+BuildRequires:	pwlib-devel >= 1.3.2
 BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
