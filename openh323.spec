@@ -70,14 +70,14 @@ touch src/asnparser.version
 #-D__DEPRECATED -D_GLIBCPP_DEPRECATED -fpermissive
 
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
-		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti" \
-		CC="gcc2" CPP="g++2" CPLUS="g++2"
+		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti" 
+#		CC="gcc2" CPP="g++2" CPLUS="g++2"
 %{__make} -C src %{?debug:debugnoshared}%{!?debug:optnoshared} \
-		OPTCCFLAGS="%{rpmcflags}" \
-		CC="gcc2" CPP="g++2" CPLUS="g++2"
+		OPTCCFLAGS="%{rpmcflags}" 
+#		CC="gcc2" CPP="g++2" CPLUS="g++2"
 %{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
-		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti" \
-		CC="gcc2" CPP="g++2" CPLUS="g++2"
+		OPTCCFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti" 
+#		CC="gcc2" CPP="g++2" CPLUS="g++2"
 
 %install
 rm -rf $RPM_BUILD_ROOT
