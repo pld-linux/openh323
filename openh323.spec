@@ -1,6 +1,6 @@
 Summary:	OpenH323 Library
 Name:		openh323
-Version:	1.5.5
+Version:	1.5.7
 Release:	1
 License:	MPL
 Group:		Libraries
@@ -15,6 +15,7 @@ URL:		http://www.openh323.org/
 BuildRequires:	pwlib-devel
 BuildRequires:	libstdc++-devel
 #BuildRequires:	pwlib-static
+BuildConflicts: openh323-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description 
@@ -66,9 +67,11 @@ Biblioteki statyczne OpenH323.
 PWLIBDIR=%{_prefix}; export PWLIBDIR
 OPENH323DIR=`pwd`; export OPENH323DIR
 OPENH323_BUILD="yes"; export OPENH323_BUILD
-%{__make} %{?debug:debugshared}%{!?debug:optshared} \
+touch src/asnparser.version
+
+%{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
 		OPTCCFLAGS="%{!?debug:$RPM_OPT_FLAGS}"
-%{__make} %{?debug:debugnoshared}%{!?debug:optnoshared} \
+%{__make} -C src %{?debug:debugnoshared}%{!?debug:optnoshared} \
 		OPTCCFLAGS="%{!?debug:$RPM_OPT_FLAGS}"
 
 cd samples/simple
