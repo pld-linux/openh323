@@ -75,7 +75,7 @@ touch src/asnparser.version
 		CC=%{__cc} CPLUS=%{__cxx} \
 		OPTCCFLAGS="%{rpmcflags}" 
 
-#%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
+#%%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
 #		CC=%{__cc} CPLUS=%{__cxx} \
 #		OPTCCFLAGS="%{rpmcflags}" 
 
