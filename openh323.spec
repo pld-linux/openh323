@@ -10,9 +10,10 @@ Group(pl):	Biblioteki
 Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
 Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
+Patch2:		%{name}-no_samples.patch
 URL:		http://www.openh323.org/
 BuildRequires:	pwlib-devel
-BuildRequires:	pwlib-static
+#BuildRequires:	pwlib-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description 
@@ -57,21 +58,25 @@ Biblioteki statyczne OpenH323.
 %setup -qn %{name}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
 OPENH323DIR=`pwd`; export OPENH323DIR
-%{__make} both OPTCCFLAGS="$RPM_OPT_FLAGS"
+%{__make} both OPTCCFLAGS="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir}/openh323,%{_bindir},%{_datadir}/misc}
+
 install lib/lib* $RPM_BUILD_ROOT%{_libdir}
 install include/*.h $RPM_BUILD_ROOT%{_includedir}/openh323
-install samples/simple/obj_linux_x86_r/simph323 $RPM_BUILD_ROOT%{_bindir}
+#install samples/simple/obj_linux_x86_r/simph323 $RPM_BUILD_ROOT%{_bindir}
 
 sed -e's@\$(OPENH323DIR)/include@&/openh323@' < openh323u.mak \
-			> $RPM_BUILD_ROOT%{_datadir}/misc/openh323u.mak
+	> $RPM_BUILD_ROOT%{_datadir}/misc/openh323u.mak
+
+gzip -9nf *.txt
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -81,14 +86,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.txt
-%{_libdir}/lib*.so.*.*
-%attr(755,root,root) %{_bindir}/*
+#%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_includedir}/*
-%{_libdir}/*.so
+%doc *.gz
+%attr(755,root,root) %{_libdir}/*.so
+%{_includedir}/*
 %{_datadir}/misc/*
 
 %files static
