@@ -22,7 +22,7 @@ BuildRequires:	ffmpeg-devel >= 0.4.6
 BuildRequires:	libgsm-devel >= 1.0.10
 BuildRequires:	libstdc++-devel
 BuildRequires:	lpc10-devel >= 1.5
-BuildRequires:	pwlib-devel >= 1.5.0
+BuildRequires:	pwlib-devel >= 1.6.4
 BuildRequires:	speex-devel >= 1.0
 %requires_eq	pwlib
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -43,9 +43,9 @@ bez op³at.
 Summary:	OpenH323 development files
 Summary(pl):	Pliki dla developerów OpenH323
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	ffmpeg-devel
-Requires:	pwlib-devel
+Requires:	pwlib-devel >= 1.6.4
 
 %description devel
 Header files and libraries for developing applications that use
@@ -59,7 +59,7 @@ u¿ywaj±cych OpenH323.
 Summary:	OpenH323 static libraries
 Summary(pl):	Biblioteki statyczne OpenH323
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 OpenH323 static libraries.
