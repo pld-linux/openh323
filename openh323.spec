@@ -86,12 +86,12 @@ touch src/asnparser.version
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
 		CC=%{__cc} \
 		CPLUS=%{__cxx} \
-		OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}" 
+		OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
 
 #%%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
 #		CC=%{__cc} \
 #		CPLUS=%{__cxx} \
-#		OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}" 
+#		OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
