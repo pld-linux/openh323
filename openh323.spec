@@ -10,13 +10,11 @@ Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
 Patch3:		%{name}-lib.patch
-Patch4:		%{name}-glibc.patch
-Patch5:		%{name}-speex.patch
+Patch4:		%{name}-speex.patch
 URL:		http://www.openh323.org/
 BuildRequires:	pwlib-devel >= 1.4.0
 BuildRequires:	Speex-devel >= 0.8.1
 BuildRequires:	libstdc++-devel
-#BuildRequires:	glibc-devel >= 2.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %requires_eq	pwlib
 
@@ -66,8 +64,7 @@ Biblioteki statyczne OpenH323.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p0
-#%patch4 -p1
-%patch5 -p1
+%patch4 -p1
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
