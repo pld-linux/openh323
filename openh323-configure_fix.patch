@@ -1,0 +1,48 @@
+--- ./configure.in.org	Fri Jul 18 13:55:27 2003
++++ ./configure.in	Fri Jul 18 14:08:40 2003
+@@ -33,11 +33,9 @@
+ 
+ PLATFORM_PTLIB="ptlib_${OSTYPE}_${MACHTYPE}_r"
+ 
+-CPPFLAGS_save="$CPPFLAGS"
+ CPPFLAGS="-I/usr/include/ptlib/unix/ -I/usr/include/ptclib/ -I/usr/local/include/ptlib/unix/ -I/usr/local/include/ptclib/ $CPPFLAGS"
+ AC_LANG([C++])
+ AC_CHECK_HEADERS(ptlib.h, HAS_PTLIB=1)
+-CPPFLAGS="$CPPFLAGS_save"
+ 
+ if test "${HAS_PTLIB:-unset}" != "unset" ; then
+ dnl  AC_CHECK_LIB(${PLATFORM_PTLIB}, ldap_open, HAS_PTLIB=1, HAS_PTLIB=)
+@@ -46,7 +44,7 @@
+   dnl find include files
+   AC_CHECK_FILE(${PWLIBDIR}/include/ptlib, HAS_PTLIB=1)
+   if test "${HAS_PTLIB:-unset}" != "unset" ; then
+-    AC_PATH_PROG(PTLIB_CONFIG, ptlib-config, , ${PWLIBDIR}/make/)
++    AC_PATH_PROG(PTLIB_CONFIG, ptlib-config, , ${PWLIBDIR}/make/:${PWLIBDIR}/bin/)
+   else
+     AC_CHECK_FILE(/usr/local/include/ptlib.h, HAS_PTLIB=1)
+     if test "${HAS_PTLIB:-unset}" != "unset" ; then
+--- ./openh323u.mak.in.org	Fri Jul 18 13:55:27 2003
++++ ./openh323u.mak.in	Fri Jul 18 14:46:56 2003
+@@ -122,7 +122,6 @@
+ 
+ PWLIBDIR	= @PWLIBDIR@
+ PWLIBMAKEDIR	= @PWLIBDIR@/share/pwlib/make
+-STDCCFLAGS	+= @STDCCFLAGS@
+ LDFLAGS		+= @LDFLAGS@
+ ENDLDLIBS	:= @ENDLDLIBS@ $(ENDLDLIBS)
+ H323_AVCODEC	= @H323_AVCODEC@
+@@ -259,10 +258,10 @@
+ endif # /usr/lib
+ 
+ ifdef VPB_LIB_PATH
+-HAS_VPB    := 1
+-STDCCFLAGS += -DHAS_VPB
+-LDFLAGS	   += -L$(VPB_LIB_PATH)
+-LDLIBS	   += -l$(VPB_LIB)
++HAS_VPB		:= 1
++STDCCFLAGS	+= -DHAS_VPB @STDCCFLAGS@
++LDFLAGS		+= -L$(VPB_LIB_PATH)
++LDLIBS		+= -l$(VPB_LIB)
+ endif
+ 
+ 
