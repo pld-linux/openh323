@@ -1,8 +1,8 @@
---- openh323/Makefile~	Thu May 18 13:53:33 2000
-+++ openh323/Makefile	Mon Jan  8 11:56:41 2001
-@@ -170,7 +170,7 @@
- # Initial revision
- #
+--- openh323/Makefile.in.orig	2003-07-28 21:30:29.000000000 +0200
++++ openh323/Makefile.in	2003-09-03 22:04:49.230388584 +0200
+@@ -228,7 +228,7 @@
+ # export NOAUDIOCODECS=true
+ # export NOVIDEO=true
  
 -SUBDIRS := src samples/simple
 +SUBDIRS := src

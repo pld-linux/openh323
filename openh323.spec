@@ -1,12 +1,12 @@
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.12.0
+Version:	1.12.2
 Release:	1
 License:	MPL 1.0
 Group:		Libraries
 Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
-# Source0-md5:	f7932f0a17d6afafc7332036a4b5d392
+# Source0-md5:	15f0b12b60769d03eca9e498050776f3
 Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
@@ -84,14 +84,14 @@ touch src/asnparser.version
 %configure
 
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
-		CC=%{__cc} \
-		CPLUS=%{__cxx} \
-		OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
+	CC=%{__cc} \
+	CPLUS=%{__cxx} \
+	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
 
 #%%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
-#		CC=%{__cc} \
-#		CPLUS=%{__cxx} \
-#		OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
+#	CC=%{__cc} \
+#	CPLUS=%{__cxx} \
+#	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -120,10 +120,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/*.so
+%attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/*
 %{_datadir}/openh323
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/*.a
+%{_libdir}/lib*.a

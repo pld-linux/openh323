@@ -20,7 +20,7 @@
  
 --- openh323/openh323u.mak.in.orig	2003-05-14 21:52:44.000000000 +0200
 +++ openh323/openh323u.mak.in	2003-07-13 00:04:28.000000000 +0200
-@@ -121,18 +121,19 @@
+@@ -121,19 +121,20 @@
  #
  
  PWLIBDIR	= @PWLIBDIR@
@@ -29,6 +29,7 @@
  LDFLAGS		+= @LDFLAGS@
  ENDLDLIBS	:= @ENDLDLIBS@ $(ENDLDLIBS)
  H323_AVCODEC	= @H323_AVCODEC@
+ H323_VICH263	= @H323_VICH263@      
  
  ifdef LIBRARY_MAKEFILE
 -include $(PWLIBDIR)/make/unix.mak
@@ -70,15 +71,15 @@
 --- openh323/configure.in.orig	2003-05-22 14:25:00.000000000 +0200
 +++ openh323/configure.in	2003-07-13 00:08:26.000000000 +0200
 @@ -76,12 +76,6 @@
- if test "${PWLIBDIR:-unset}" == "unset" ; then
-   PWLIBDIR=`ptlib-config --prefix`
+   PWLIBDIR=`$PTLIB_CONFIG --prefix`
  fi
--if test "x$PWLIBDIR" == "x/usr" -o "x$PWLIBDIR" == "x/usr/"; then
+ 
+-if test "x$PWLIBDIR" = "x/usr" -o "x$PWLIBDIR" = "x/usr/"; then
 -  PWLIBDIR="/usr/share/pwlib/"
 -fi
--if test "xPWLIBDIR" == "x/usr/local" -o "x$PWLIBDIR" == "x/usr/"; then
+-if test "xPWLIBDIR" = "x/usr/local" -o "x$PWLIBDIR" = "x/usr/"; then
 -  PWLIBDIR="/usr/local/share/pwlib/"
 -fi
+ 
  echo "PWLib prefix set to.... $PWLIBDIR"
- AC_SUBST(PWLIBDIR)
  
