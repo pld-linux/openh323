@@ -1,7 +1,7 @@
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.9.10
+Version:	1.10.0
 Release:	1
 License:	MPL
 Group:		Libraries
@@ -12,11 +12,12 @@ Patch2:		%{name}-no_samples.patch
 Patch3:		%{name}-lib.patch
 Patch4:		%{name}-glibc.patch
 URL:		http://www.openh323.org/
-BuildRequires:	pwlib-devel >= 1.3.11
+BuildRequires:	pwlib-devel >= 1.4.0
 BuildRequires:	Speex-devel >= 0.8.1
 BuildRequires:	libstdc++-devel
-BuildRequires:	glibc-devel >= 2.3
+#BuildRequires:	glibc-devel >= 2.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+%requires_eq	pwlib
 
 %description
 The OpenH323 project aims to create a full featured, interoperable,
@@ -64,7 +65,7 @@ Biblioteki statyczne OpenH323.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p0
-%patch4 -p1
+#%patch4 -p1
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
