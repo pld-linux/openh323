@@ -27,7 +27,7 @@ diff -urN openh323.org/openh323u.mak openh323/openh323u.mak
  
  
 -OH323_BASE  = h323_$(PLATFORM_TYPE)_$(OH323_SUFFIX)$(LIB_TYPE)
-+OH323_BASE  = h323
++OH323_BASE  = openh323
  OH323_FILE  = lib$(OH323_BASE).$(LIB_SUFFIX)
  
  LDFLAGS	    += -L$(OH323_LIBDIR)
