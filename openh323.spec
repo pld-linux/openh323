@@ -1,7 +1,7 @@
 Summary:	OpenH323 Library
 Name:		openh323
-Version:	1.1pl1
-Release:	3
+Version:	1.5.5
+Release:	1
 License:	MPL
 Group:		Libraries
 Group(de):	Libraries
@@ -73,7 +73,7 @@ OPENH323_BUILD="yes"; export OPENH323_BUILD
 
 cd samples/simple
 %{__make} %{?debug:debugshared}%{!?debug:optshared} \
-	OPTCCFLAGS="%{!?debug:$RPM_OPT_FLAGS}"
+	OPTCCFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
