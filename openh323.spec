@@ -15,7 +15,6 @@ URL:		http://www.openh323.org/
 BuildRequires:	pwlib-devel >= 1.4.3
 BuildRequires:	Speex-devel >= 0.8.1
 BuildRequires:	libstdc++-devel
-BuildRequires:	openldap-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %requires_eq	pwlib
 
