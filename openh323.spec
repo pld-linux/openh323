@@ -1,8 +1,8 @@
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.7.8
-Release:	2
+Version:	1.7.10
+Release:	1
 License:	MPL
 Group:		Libraries
 Group(de):	Libraries
