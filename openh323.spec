@@ -14,6 +14,7 @@ Patch4:		%{name}-glibc.patch
 URL:		http://www.openh323.org/
 BuildRequires:	pwlib-devel >= 1.3.10
 BuildRequires:	libstdc++-devel
+BuildRequires:	glibc-devel >= 2.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
