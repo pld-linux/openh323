@@ -1,14 +1,14 @@
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.13.3
-%define	fver	%(echo %{version} | tr . _)-1
-Release:	3
+Version:	1.13.4
+%define	fver	%(echo %{version} | tr . _)
+Release:	1
 License:	MPL 1.0
 Group:		Libraries
 #Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
 Source0:	http://dl.sourceforge.net/openh323/%{name}-v%{fver}-src.tar.gz
-# Source0-md5:	ac72cc613f8e52cc4cfcac225046f8c9
+# Source0-md5:	b8bb31b4b9f43158c3658da4182ebeee
 Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
@@ -23,7 +23,7 @@ BuildRequires:	ffmpeg-devel >= 0.4.6
 BuildRequires:	libgsm-devel >= 1.0.10
 BuildRequires:	libstdc++-devel
 BuildRequires:	lpc10-devel >= 1.5
-BuildRequires:	pwlib-devel >= 1.6.4-3
+BuildRequires:	pwlib-devel >= 1.6.5
 BuildRequires:	speex-devel >= 1.0
 %requires_eq	pwlib
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -46,7 +46,7 @@ Summary(pl):	Pliki dla developerów OpenH323
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ffmpeg-devel
-Requires:	pwlib-devel >= 1.6.4-3
+Requires:	pwlib-devel >= 1.6.5
 
 %description devel
 Header files and libraries for developing applications that use
