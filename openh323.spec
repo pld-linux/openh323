@@ -11,7 +11,7 @@ Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
 Patch3:		%{name}-lib.patch
 URL:		http://www.openh323.org/
-BuildRequires:	pwlib-devel >= 1.3.2
+BuildRequires:	pwlib-devel >= 1.3.7
 BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
