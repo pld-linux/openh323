@@ -12,8 +12,6 @@ BuildRequires:	pwlib-devel
 BuildRequires:	pwlib-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_prefix		/usr/X11R6
-
 %description 
 he OpenH323 project aims to create a full featured, interoperable, Open
 Source implementation of the ITU H.323 teleconferencing protocol that can be
