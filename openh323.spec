@@ -1,6 +1,6 @@
 Summary:	OpenH323 Library
 Name:		openh323
-Version:	1.6.0
+Version:	1.6.1
 Release:	1
 License:	MPL
 Group:		Libraries
