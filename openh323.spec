@@ -81,12 +81,15 @@ OPENH323DIR=`pwd`; export OPENH323DIR
 OPENH323_BUILD="yes"; export OPENH323_BUILD
 touch src/asnparser.version
 %{__autoconf}
-%configure
+%configure \
+	LDFLAGS="-L/usr/X11R6/lib"
 
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
 		CC=%{__cc} \
 		CPLUS=%{__cxx} \
-		OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}" 
+		OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG} -I/usr/X11R6/include" \
+		CFLAGS="%{rpmcflags} -I/usr/X11R6/include"
+		
 
 #%%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
 #		CC=%{__cc} \
