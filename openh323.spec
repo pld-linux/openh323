@@ -13,6 +13,7 @@ Patch2:		%{name}-no_samples.patch
 Patch3:		%{name}-lib.patch
 Patch4:		%{name}-system-libs.patch
 Patch5:		%{name}-ffmpeg.patch
+Patch6:		%{name}-configure_fix.patch
 URL:		http://www.openh323.org/
 BuildRequires:	autoconf
 BuildRequires:	ffmpeg-devel >= 0.4.6
@@ -72,6 +73,7 @@ Biblioteki statyczne OpenH323.
 %patch3 -p0
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
@@ -82,11 +84,13 @@ touch src/asnparser.version
 %configure
 
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
-		CC=%{__cc} CPLUS=%{__cxx} \
+		CC=%{__cc} \
+		CPLUS=%{__cxx} \
 		OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}" 
 
 #%%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
-#		CC=%{__cc} CPLUS=%{__cxx} \
+#		CC=%{__cc} \
+#		CPLUS=%{__cxx} \
 #		OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}" 
 
 %install
