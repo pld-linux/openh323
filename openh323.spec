@@ -19,7 +19,7 @@ Patch2:		%{name}-no_samples.patch
 URL:		http://www.openh323.org/
 BuildRequires:	pwlib-devel >= 1.2.9
 BuildRequires:	libstdc++-devel
-BuildConflicts:	openh323-devel
+BuildConflicts:	openh323-devel < %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description 
