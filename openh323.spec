@@ -1,6 +1,6 @@
 
-%define _snap 20040124
-%define _snapver 01
+%define _snap 20040223
+%define _snapver 02
 
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
@@ -10,7 +10,7 @@ Release:	0.%{_snap}.1
 License:	MPL 1.0
 Group:		Libraries
 Source0:	http://snapshots.seconix.com/cvs/archive/%{name}-cvs_%{_snap}-%{_snapver}.tar.gz
-# Source0-md5:	655fe0ffeea09be6bafa8fb0fc023a78
+# Source0-md5:	f8354a21dc5aacda9decc2a2de46316c
 Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-no_samples.patch
