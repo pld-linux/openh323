@@ -3,7 +3,7 @@ Summary(pl):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.13.4
 %define	fver	%(echo %{version} | tr . _)
-Release:	2
+Release:	3
 License:	MPL 1.0
 Group:		Libraries
 #Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
@@ -23,10 +23,10 @@ BuildRequires:	ffmpeg-devel >= 0.4.6
 BuildRequires:	libgsm-devel >= 1.0.10
 BuildRequires:	libstdc++-devel
 BuildRequires:	lpc10-devel >= 1.5
-BuildRequires:	pwlib-devel >= 1.6.5
+BuildRequires:	pwlib-devel >= 1.6.5-3
 BuildRequires:	speex-devel >= 1.0
 %requires_eq	pwlib
-Requires:	pwlib >= 1.6.5
+Requires:	pwlib >= 1.6.5-3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -47,7 +47,7 @@ Summary(pl):	Pliki dla developerów OpenH323
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ffmpeg-devel
-Requires:	pwlib-devel >= 1.6.5
+Requires:	pwlib-devel >= 1.6.5-3
 
 %description devel
 Header files and libraries for developing applications that use
@@ -91,7 +91,8 @@ touch src/asnparser.version
 %{__make} -C src %{?debug:debugshared}%{!?debug:optshared} \
 	CC=%{__cc} \
 	CPLUS=%{__cxx} \
-	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
+	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}" \
+	OH323_LIBDIR="`pwd`/lib"
 
 #%%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
 #	CC=%{__cc} \
