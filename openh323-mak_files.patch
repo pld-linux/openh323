@@ -1,7 +1,7 @@
 diff -urN openh323.orig/openh323u.mak openh323/openh323u.mak
---- openh323.orig/openh323u.mak	Wed Sep 18 12:48:00 2002
-+++ openh323/openh323u.mak	Wed Sep 18 13:01:29 2002
-@@ -101,12 +101,12 @@
+--- openh323.orig/openh323u.mak	Tue Dec 17 22:28:04 2002
++++ openh323/openh323u.mak	Tue Dec 17 22:34:00 2002
+@@ -122,12 +122,12 @@
  
  
  ifdef LIBRARY_MAKEFILE
@@ -16,7 +16,7 @@ diff -urN openh323.orig/openh323u.mak openh323/openh323u.mak
  endif
  
  
-@@ -137,7 +137,7 @@
+@@ -164,7 +164,7 @@
  
  
  
@@ -25,27 +25,26 @@ diff -urN openh323.orig/openh323u.mak openh323/openh323u.mak
  OH323_FILE  = lib$(OH323_BASE).$(LIB_SUFFIX)
  
  LDFLAGS	    += -L$(OH323_LIBDIR)
-@@ -213,6 +213,7 @@
+@@ -240,6 +240,7 @@
  
  $(TARGET) :	$(OH323_LIBDIR)/$(OH323_FILE)
  
-+ifdef OPENH323_BUILD
++ifdef OPENH323_BULD
  ifndef LIBRARY_MAKEFILE
  ifdef DEBUG
  $(OH323_LIBDIR)/$(OH323_FILE):
-@@ -222,7 +223,7 @@
+@@ -249,6 +250,7 @@
  	$(MAKE) -C $(OH323_SRCDIR) opt
  endif
  endif
--
 +endif
  
- # End of file
- 
+ ccflags:
+ 	@echo $(STDCCFLAGS)
 diff -urN openh323.orig/src/Makefile openh323/src/Makefile
---- openh323.orig/src/Makefile	Wed Sep 18 12:47:59 2002
-+++ openh323/src/Makefile	Wed Sep 18 12:53:45 2002
-@@ -611,7 +611,7 @@
+--- openh323.orig/src/Makefile	Tue Dec 17 22:28:05 2002
++++ openh323/src/Makefile	Tue Dec 17 22:37:20 2002
+@@ -738,7 +738,7 @@
  
  ####################################################
  
@@ -54,7 +53,7 @@ diff -urN openh323.orig/src/Makefile openh323/src/Makefile
  
  ####################################################
  
-@@ -624,7 +624,7 @@
+@@ -751,7 +751,7 @@
  LIB_BASENAME=$(OH323_BASE)
  LIB_FILENAME=$(OH323_FILE)
  
