@@ -1,15 +1,3 @@
-diff -urN openh323.orig/Makefile openh323/Makefile
---- openh323.orig/Makefile	Wed Sep 18 12:48:00 2002
-+++ openh323/Makefile	Wed Sep 18 12:53:45 2002
-@@ -240,7 +240,7 @@
- 	$(MAKE) all
- 
- 
--include $(PWLIBDIR)/make/ptlib.mak
-+include $(PWLIBDIR)/share/pwlib/ptlib.mak
- 
- 
- # Pass through commands to the subdirectory for sample app
 diff -urN openh323.orig/openh323u.mak openh323/openh323u.mak
 --- openh323.orig/openh323u.mak	Wed Sep 18 12:48:00 2002
 +++ openh323/openh323u.mak	Wed Sep 18 13:01:29 2002
