@@ -1,6 +1,6 @@
 Summary:	OpenH323 Library
 Name:		openh323
-Version:	1.5.7
+Version:	1.6.0
 Release:	1
 License:	MPL
 Group:		Libraries
@@ -14,7 +14,6 @@ Patch2:		%{name}-no_samples.patch
 URL:		http://www.openh323.org/
 BuildRequires:	pwlib-devel
 BuildRequires:	libstdc++-devel
-#BuildRequires:	pwlib-static
 BuildConflicts: openh323-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
