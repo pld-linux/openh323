@@ -23,9 +23,10 @@ BuildRequires:	ffmpeg-devel >= 0.4.6
 BuildRequires:	libgsm-devel >= 1.0.10
 BuildRequires:	libstdc++-devel
 BuildRequires:	lpc10-devel >= 1.5
-BuildRequires:	pwlib-devel >= 1.6.5
+BuildRequires:	pwlib-devel >= 1.6.4-3
 BuildRequires:	speex-devel >= 1.0
 %requires_eq	pwlib
+Requires:	pwlib >= 1.6.4-3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,7 +47,7 @@ Summary(pl):	Pliki dla developerów OpenH323
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ffmpeg-devel
-Requires:	pwlib-devel >= 1.6.5
+Requires:	pwlib-devel >= 1.6.4-3
 
 %description devel
 Header files and libraries for developing applications that use
