@@ -86,6 +86,7 @@ Biblioteki statyczne OpenH323.
 PWLIBDIR=%{_prefix}; export PWLIBDIR
 OPENH323DIR=`pwd`; export OPENH323DIR
 OPENH323_BUILD="yes"; export OPENH323_BUILD
+cp -f /usr/share/automake/config.sub .
 %{__autoconf}
 %configure \
 	--enable-localspeex=no \
