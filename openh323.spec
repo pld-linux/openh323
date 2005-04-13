@@ -21,6 +21,7 @@ Patch4:		%{name}-ffmpeg.patch
 Patch5:		%{name}-configure_fix.patch
 URL:		http://www.openh323.org/
 BuildRequires:	autoconf >= 2.50
+BuildRequires:	automake
 BuildRequires:	ffmpeg-devel >= 0.4.6
 BuildRequires:	libgsm-devel >= 1.0.10
 BuildRequires:	libstdc++-devel
