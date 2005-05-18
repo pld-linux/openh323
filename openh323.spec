@@ -4,15 +4,15 @@
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.15.3
+Version:	1.17.1
 %define	fver	%(echo %{version} | tr . _)
 Release:	1
 License:	MPL 1.0
 Group:		Libraries
 #Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
-#Source0:	http://dl.sourceforge.net/openh323/%{name}-v%{fver}-src-tar.gz
-Source0:	http://www.seconix.com/%{name}-%{version}.tar.gz
-# Source0-md5:	f9d25921281843fd2304da494b2e04e2
+Source0:	http://dl.sourceforge.net/openh323/%{name}-v%{fver}-src-tar.gz
+# Source0-md5:	f335c8d3fc36f1e9bb4846e8dbc2c342
+#Source0:	http://www.seconix.com/%{name}-%{version}.tar.gz
 Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-lib.patch
@@ -75,7 +75,7 @@ OpenH323 static libraries.
 Biblioteki statyczne OpenH323.
 
 %prep
-%setup -q
+%setup -q -n %{name}_v%{fver}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p0
