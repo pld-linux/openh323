@@ -114,7 +114,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir}}
 # using cp as install won't preserve links
 cp -d lib/lib*.a $RPM_BUILD_ROOT%{_libdir}
 install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
-
+install version.h $RPM_BUILD_ROOT%{_includedir}/%{name}
 sed -i -e 's@\$(OPENH323DIR)/include@&/openh323@' $RPM_BUILD_ROOT%{_datadir}/openh323/openh323u.mak
 
 %clean
