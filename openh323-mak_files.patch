@@ -1,6 +1,7 @@
---- openh323-1.15.3/configure.ac.orig	2004-11-26 09:47:00.000000000 +0100
-+++ openh323-1.15.3/configure.ac	2005-03-25 21:42:25.686673392 +0100
-@@ -85,13 +85,6 @@
+diff -Naur openh323_v1_17_1.orig/configure.ac openh323_v1_17_1/configure.ac
+--- openh323_v1_17_1.orig/configure.ac	2005-05-18 18:27:25.000000000 +0200
++++ openh323_v1_17_1/configure.ac	2005-05-18 18:27:18.000000000 +0200
+@@ -75,13 +75,6 @@
    PWLIBDIR=`$PTLIB_CONFIG --prefix`
  fi
  
@@ -14,94 +15,9 @@
  echo "PWLib prefix set to.... $PWLIBDIR"
  
  AC_SUBST(PWLIBDIR)
---- openh323-1.15.3/openh323u.mak.in.orig	2004-06-10 15:16:30.000000000 +0200
-+++ openh323-1.15.3/openh323u.mak.in	2005-03-25 21:43:00.532376040 +0100
-@@ -157,9 +157,11 @@
- #
- 
- PWLIBDIR	= @PWLIBDIR@
--OPENH323DIR	= @OPENH323DIR@
-+PWLIBMAKEDIR	= @PWLIBDIR@/share/pwlib/make
-+ifndef OPENH323DIR
-+OPENH323DIR	= /usr
-+endif
- STDCCFLAGS	+= @STDCCFLAGS@
--LDFLAGS		+= @LDFLAGS@
- ENDLDLIBS	:= @ENDLDLIBS@ $(ENDLDLIBS)
- 
- H323_AVCODEC	     = @H323_AVCODEC@
-@@ -170,12 +172,12 @@
- NOTRACE	             = @NOTRACE@
- 
- ifdef LIBRARY_MAKEFILE
--include $(PWLIBDIR)/make/unix.mak
-+include $(PWLIBMAKEDIR)/unix.mak
- else
- ifeq ($(NOTRACE), 1)
- OBJDIR_SUFFIX := n
- endif
--include $(PWLIBDIR)/make/ptlib.mak
-+include $(PWLIBMAKEDIR)/ptlib.mak
- endif
- 
- LIBDIRS += $(OPENH323DIR)
-@@ -189,7 +191,7 @@
- OH323_INCDIR = $(OPENH323DIR)/include
- endif
- ifndef OH323_LIBDIR
--OH323_LIBDIR = $(OPENH323DIR)/lib
-+OH323_LIBDIR = $(subst $(PWLIBDIR),$(OPENH323DIR),$(PW_LIBDIR))
- endif
- 
- ifeq ($(NOTRACE), 1)
-@@ -209,7 +211,7 @@
- #STDCCFLAGS += -DNO_H323_VIDEO
- #endif
- 
--OH323_BASE  = h323_$(PLATFORM_TYPE)_$(OH323_SUFFIX)$(LIB_TYPE)
-+OH323_BASE  = openh323
- OH323_FILE  = lib$(OH323_BASE).$(LIB_SUFFIX)
- 
- LDFLAGS	    += -L$(OH323_LIBDIR)
-@@ -302,6 +304,7 @@
- 
- $(TARGET) :	$(OH323_LIBDIR)/$(OH323_FILE)
- 
-+ifdef OPENH323_BUILD
- ifndef LIBRARY_MAKEFILE
- ifdef DEBUG
- $(OH323_LIBDIR)/$(OH323_FILE):
-@@ -311,6 +314,7 @@
- 	$(MAKE) -C $(OH323_SRCDIR) opt
- endif
- endif
-+endif
- 
- # End of file
- 
-diff -urN openh323.org/src/Makefile openh323/src/Makefile
---- openh323.org/src/Makefile	2004-03-18 01:01:15.309193288 +0100
-+++ openh323/src/Makefile	2004-03-18 01:01:22.636079432 +0100
-@@ -847,7 +847,7 @@
- 
- ####################################################
- 
--include $(PWLIBDIR)/make/common.mak
-+include $(PWLIBMAKEDIR)/common.mak
- 
- ####################################################
- 
-@@ -859,7 +859,7 @@
- LIB_BASENAME=$(OH323_BASE)
- LIB_FILENAME=$(OH323_FILE)
- 
--include $(PWLIBDIR)/make/lib.mak
-+include $(PWLIBMAKEDIR)/lib.mak
- 
- ####################################################
- 
---- openh323-1.15.3/Makefile.in.orig	2004-11-27 19:42:15.000000000 +0100
-+++ openh323-1.15.3/Makefile.in	2005-03-26 00:21:43.147718464 +0100
+diff -Naur openh323_v1_17_1.orig/Makefile.in openh323_v1_17_1/Makefile.in
+--- openh323_v1_17_1.orig/Makefile.in	2004-11-27 19:42:15.000000000 +0100
++++ openh323_v1_17_1/Makefile.in	2005-05-18 18:27:18.000000000 +0200
 @@ -331,15 +331,13 @@
  
  install:
@@ -122,3 +38,90 @@ diff -urN openh323.org/src/Makefile openh323/src/Makefile
  	( for dir in $(DESTDIR)$(LIBDIR) \
  		     $(DESTDIR)$(PREFIX)/include/openh323 \
  		     $(DESTDIR)$(PREFIX)/share/openh323 ;\
+diff -Naur openh323_v1_17_1.orig/openh323u.mak.in openh323_v1_17_1/openh323u.mak.in
+--- openh323_v1_17_1.orig/openh323u.mak.in	2005-05-18 18:27:25.000000000 +0200
++++ openh323_v1_17_1/openh323u.mak.in	2005-05-18 18:27:18.000000000 +0200
+@@ -163,9 +163,11 @@
+ #
+ 
+ PWLIBDIR	= @PWLIBDIR@
+-OPENH323DIR	= @OPENH323DIR@
++PWLIBMAKEDIR    = @PWLIBDIR@/share/pwlib/make
++ifndef OPENH323DIR
++OPENH323DIR     = /usr
++endif
+ STDCCFLAGS	+= @STDCCFLAGS@
+-LDFLAGS		+= @LDFLAGS@
+ LDLIBS		+= @LDLIBS@
+ ENDLDLIBS	:= @ENDLDLIBS@ $(ENDLDLIBS)
+ 
+@@ -184,12 +186,12 @@
+ H323_IXJ	     = @H323_IXJ@
+ 
+ ifdef LIBRARY_MAKEFILE
+-include $(PWLIBDIR)/make/unix.mak
++include $(PWLIBMAKEDIR)/unix.mak
+ else
+ ifeq ($(NOTRACE), 1)
+ OBJDIR_SUFFIX := n
+ endif # NOTRACE
+-include $(PWLIBDIR)/make/ptlib.mak
++include $(PWLIBMAKEDIR)/ptlib.mak
+ endif # LIBRARY_MAKEFILE
+ 
+ LIBDIRS += $(OPENH323DIR)
+@@ -204,7 +206,7 @@
+ endif # PREFIX
+ 
+ ifndef OH323_LIBDIR
+-OH323_LIBDIR = $(OPENH323DIR)/lib
++OH323_LIBDIR = $(subst $(PWLIBDIR),$(OPENH323DIR),$(PW_LIBDIR))
+ endif # OH323_LIBDIR
+ 
+ ifeq ($(NOTRACE), 1)
+@@ -216,7 +218,7 @@
+ OH323_SUFFIX = $(OBJ_SUFFIX)
+ endif # NOTRACE
+ 
+-OH323_BASE  = h323_$(PLATFORM_TYPE)_$(OH323_SUFFIX)$(LIB_TYPE)
++OH323_BASE  = openh323
+ OH323_FILE  = lib$(OH323_BASE).$(LIB_SUFFIX)
+ 
+ LDFLAGS	    := -L$(OH323_LIBDIR) $(LDFLAGS)
+@@ -271,6 +273,7 @@
+ 
+ $(TARGET) :	$(OH323_LIBDIR)/$(OH323_FILE)
+ 
++ifdef OPENH323_BUILD
+ ifndef LIBRARY_MAKEFILE
+ ifdef DEBUG
+ $(OH323_LIBDIR)/$(OH323_FILE):
+@@ -280,6 +283,7 @@
+ 	$(MAKE) -C $(OH323_SRCDIR) opt
+ endif # DEBUG
+ endif # LIBRARY_MAKEFILE
++endif # OPENH323_BUILD
+ 
+ # End of file
+ 
+diff -Naur openh323_v1_17_1.orig/src/Makefile openh323_v1_17_1/src/Makefile
+--- openh323_v1_17_1.orig/src/Makefile	2005-05-18 18:27:25.000000000 +0200
++++ openh323_v1_17_1/src/Makefile	2005-05-18 18:27:18.000000000 +0200
+@@ -376,7 +376,7 @@
+ 
+ ####################################################
+ 
+-include $(PWLIBDIR)/make/common.mak
++include $(PWLIBMAKEDIR)/common.mak
+ 
+ ####################################################
+ 
+@@ -388,7 +388,7 @@
+ LIB_BASENAME=$(OH323_BASE)
+ LIB_FILENAME=$(OH323_FILE)
+ 
+-include $(PWLIBDIR)/make/lib.mak
++include $(PWLIBMAKEDIR)/lib.mak
+ 
+ ####################################################
+ 
