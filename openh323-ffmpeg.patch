@@ -1,6 +1,7 @@
---- openh323-1.15.3/configure.ac.orig	2005-03-25 22:26:40.667055000 +0100
-+++ openh323-1.15.3/configure.ac	2005-03-25 22:31:03.564088600 +0100
-@@ -210,14 +210,14 @@
+diff -Naur openh323-1.15.3.orig/configure.ac openh323-1.15.3/configure.ac
+--- openh323-1.15.3.orig/configure.ac	2005-05-20 11:08:00.000000000 +0200
++++ openh323-1.15.3/configure.ac	2005-05-20 11:08:55.000000000 +0200
+@@ -200,14 +200,14 @@
      fi
  
      if test "${H323_AVCODEC:-unset}" != "unset" ; then
@@ -18,10 +19,11 @@
        STDCCFLAGS="$STDCCFLAGS -I${AVCODECINCLUDEDIR}"
  
        echo  "                      H263 codec on FFmpeg library  enabled"
---- openh323/src/ffh263codec.cxx.orig	2003-06-06 08:32:08.000000000 +0200
-+++ openh323/src/ffh263codec.cxx	2003-07-13 01:10:23.000000000 +0200
-@@ -109,7 +109,7 @@
- #include "rtp.h"
+diff -Naur openh323-1.15.3.orig/src/ffh263codec.cxx openh323-1.15.3/src/ffh263codec.cxx
+--- openh323-1.15.3.orig/src/ffh263codec.cxx	2005-05-20 11:08:00.000000000 +0200
++++ openh323-1.15.3/src/ffh263codec.cxx	2005-05-20 11:08:55.000000000 +0200
+@@ -164,7 +164,7 @@
+ #define  MSVC_OPENH323 1
  
  extern "C" {
 -#include <avcodec.h>
