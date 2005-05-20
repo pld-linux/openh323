@@ -1,18 +1,16 @@
-diff -Naur openh323_v1_17_1.orig/configure.ac openh323_v1_17_1/configure.ac
---- openh323_v1_17_1.orig/configure.ac	2005-05-18 18:30:27.000000000 +0200
-+++ openh323_v1_17_1/configure.ac	2005-05-18 18:31:56.000000000 +0200
-@@ -249,7 +249,7 @@
+diff -Naur openh323-1.15.3.orig/configure.ac openh323-1.15.3/configure.ac
+--- openh323-1.15.3.orig/configure.ac	2005-05-20 11:08:00.000000000 +0200
++++ openh323-1.15.3/configure.ac	2005-05-20 11:08:55.000000000 +0200
+@@ -200,14 +200,14 @@
      fi
  
-     if test "${H323_AVCODEC}z" != "z" ; then
+     if test "${H323_AVCODEC:-unset}" != "unset" ; then
 -      AC_CHECK_FILE(/usr/local/include/ffmpeg/avcodec.h, H323_AVCODEC=1)
 +      AC_CHECK_HEADER([ffmpeg/avcodec.h], H323_AVCODEC=1)
      fi
  
-     if test "${H323_AVCODEC}z" = "z" ; then
-@@ -257,8 +257,8 @@
-     else
-       H323_AVCODEC=1
+     if test "${H323_AVCODEC:-unset}" != "unset" ; then
+       AC_SUBST(H323_AVCODEC, 1)
        AC_DEFINE(H323_AVCODEC, 1, "ffmpeg based avodec found")
 -      AVCODECINCLUDEDIR=/usr/local/include/ffmpeg
 -      AVCODECLIBDIR=/usr/local/lib
@@ -20,11 +18,11 @@ diff -Naur openh323_v1_17_1.orig/configure.ac openh323_v1_17_1/configure.ac
 +      AVCODECLIBDIR=/usr/lib
        STDCCFLAGS="$STDCCFLAGS -I${AVCODECINCLUDEDIR}"
  
-       AC_MSG_NOTICE(Enabled non-RFC2190 H.263 using ffmpeg)
-diff -Naur openh323_v1_17_1.orig/src/ffh263codec.cxx openh323_v1_17_1/src/ffh263codec.cxx
---- openh323_v1_17_1.orig/src/ffh263codec.cxx	2005-05-18 18:30:27.000000000 +0200
-+++ openh323_v1_17_1/src/ffh263codec.cxx	2005-05-18 18:32:24.000000000 +0200
-@@ -161,7 +161,7 @@
+       echo  "                      H263 codec on FFmpeg library  enabled"
+diff -Naur openh323-1.15.3.orig/src/ffh263codec.cxx openh323-1.15.3/src/ffh263codec.cxx
+--- openh323-1.15.3.orig/src/ffh263codec.cxx	2005-05-20 11:08:00.000000000 +0200
++++ openh323-1.15.3/src/ffh263codec.cxx	2005-05-20 11:08:55.000000000 +0200
+@@ -164,7 +164,7 @@
  #define  MSVC_OPENH323 1
  
  extern "C" {
