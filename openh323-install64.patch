@@ -1,0 +1,13 @@
+--- openh323_v1_17_1/Makefile.in.orig	2005-06-04 20:57:08.000000000 +0000
++++ openh323_v1_17_1/Makefile.in	2005-06-04 21:12:22.993021136 +0000
+@@ -332,8 +332,8 @@
+ install:
+ 	mkdir -p $(DESTDIR)$(LIBDIR)
+ 	rm -f $(DESTDIR)$(LIBDIR)/libopenh323*.so*
+-	$(INSTALL) lib/*.so.*.*.* $(DESTDIR)$(LIBDIR)
+-	(for fn in lib/*.so ; do \
++	$(INSTALL) lib64/*.so.*.*.* $(DESTDIR)$(LIBDIR)
++	(for fn in lib64/*.so ; do \
+ 		cd $(DESTDIR)$(LIBDIR) ; \
+ 		rm -f `basename $$fn` ; \
+ 		ln -s libopenh323.so.*.*.* `basename $$fn` ; \
