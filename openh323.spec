@@ -83,7 +83,7 @@ Biblioteki statyczne OpenH323.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%ifarch sparc64 %{x8664}
+%if "%{_lib}" == "lib64"
 %patch6 -p1
 %endif
 
