@@ -6,7 +6,7 @@ Summary(pl):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.17.1
 %define	fver	%(echo %{version} | tr . _)
-Release:	1
+Release:	2
 License:	MPL 1.0
 Group:		Libraries
 #Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
@@ -19,6 +19,7 @@ Patch2:		%{name}-lib.patch
 Patch3:		%{name}-system-libs.patch
 Patch4:		%{name}-ffmpeg.patch
 Patch5:		%{name}-configure_fix.patch
+Patch6:		%{name}-install64.patch
 URL:		http://www.openh323.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -82,6 +83,9 @@ Biblioteki statyczne OpenH323.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%ifarch sparc64 %{x8664}
+%patch6 -p1
+%endif
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
@@ -112,7 +116,11 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir}}
 	LIBDIR=$RPM_BUILD_ROOT%{_libdir}
 	
 # using cp as install won't preserve links
+%ifnarch sparc64 %{x8664}
 cp -d lib/lib*.a $RPM_BUILD_ROOT%{_libdir}
+%else
+cp -d lib64/lib*.a $RPM_BUILD_ROOT%{_libdir}
+%endif
 install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
 install version.h $RPM_BUILD_ROOT%{_includedir}/%{name}
 sed -i -e 's@\$(OPENH323DIR)/include@&/openh323@' $RPM_BUILD_ROOT%{_datadir}/openh323/openh323u.mak
