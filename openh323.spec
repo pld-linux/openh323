@@ -116,11 +116,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir}}
 	LIBDIR=$RPM_BUILD_ROOT%{_libdir}
 	
 # using cp as install won't preserve links
-%ifnarch sparc64 %{x8664}
-cp -d lib/lib*.a $RPM_BUILD_ROOT%{_libdir}
-%else
-cp -d lib64/lib*.a $RPM_BUILD_ROOT%{_libdir}
-%endif
+cp -d %{_lib}/lib*.a $RPM_BUILD_ROOT%{_libdir}
 install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
 install version.h $RPM_BUILD_ROOT%{_includedir}/%{name}
 sed -i -e 's@\$(OPENH323DIR)/include@&/openh323@' $RPM_BUILD_ROOT%{_datadir}/openh323/openh323u.mak
