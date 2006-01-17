@@ -6,7 +6,7 @@ Summary(pl):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.17.1
 %define	fver	%(echo %{version} | tr . _)
-Release:	2
+Release:	3
 License:	MPL 1.0
 Group:		Libraries
 #Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
