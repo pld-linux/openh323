@@ -1,11 +1,11 @@
 # TODO:
 # - separate plugins to subpackages
 #
+%define	fver	%(echo %{version} | tr . _)
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.17.1
-%define	fver	%(echo %{version} | tr . _)
 Release:	3
 License:	MPL 1.0
 Group:		Libraries
@@ -103,7 +103,7 @@ cp -f /usr/share/automake/config.sub .
 	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
 
 %{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
-	CC=%{__cc} \
+	CC="%{__cc}" \
 	CPLUS=%{__cxx} \
 	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
 
@@ -114,7 +114,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir}}
 %{__make} install \
 	PREFIX=$RPM_BUILD_ROOT%{_prefix} \
 	LIBDIR=$RPM_BUILD_ROOT%{_libdir}
-	
+
 # using cp as install won't preserve links
 cp -d %{_lib}/lib*.a $RPM_BUILD_ROOT%{_libdir}
 install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
