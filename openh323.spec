@@ -5,13 +5,13 @@
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.17.1
-Release:	3
+Version:	1.18.0
+Release:	1
 License:	MPL 1.0
 Group:		Libraries
 #Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
 Source0:	http://dl.sourceforge.net/openh323/%{name}-v%{fver}-src-tar.gz
-# Source0-md5:	f335c8d3fc36f1e9bb4846e8dbc2c342
+# Source0-md5:	d7043ba34b5038f0113b099ede0884fb
 #Source0:	http://www.seconix.com/%{name}-%{version}.tar.gz
 Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
