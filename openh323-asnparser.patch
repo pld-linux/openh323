@@ -1,11 +1,11 @@
-diff -urN openh323.org/src/Makefile openh323/src/Makefile
---- openh323.org/src/Makefile	Tue Jan  8 00:59:12 2002
-+++ openh323/src/Makefile	Tue Jan  8 01:03:10 2002
-@@ -538,7 +538,7 @@
+diff -urN openh323_v1_18_0.org/src/Makefile openh323_v1_18_0/src/Makefile
+--- openh323_v1_18_0.org/src/Makefile	2005-06-07 09:59:11.000000000 +0200
++++ openh323_v1_18_0/src/Makefile	2006-04-13 00:32:11.946985500 +0200
+@@ -421,7 +421,7 @@
  # If we're cross compiling, we want the host's asnparser
  # otherwise use the one for the current platform
  ASNPARSE_DIR = $(HOSTPWLIBDIR)/tools/asnparser
--ASNPARSER = $(ASNPARSE_DIR)/obj_$(HOST_PLATFORM_TYPE)_r/asnparser
+-ASNPARSER = $(ASNPARSE_DIR)/obj_$(HOST_PLATFORM_TYPE)_d/asnparser
 +ASNPARSER = $(PWLIBDIR)/bin/asnparser
  
  
