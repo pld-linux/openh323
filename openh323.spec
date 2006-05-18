@@ -6,7 +6,7 @@ Summary(pl):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.17.1
 %define	fver	%(echo %{version} | tr . _)
-Release:	3
+Release:	4
 License:	MPL 1.0
 Group:		Libraries
 #Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
@@ -31,7 +31,7 @@ BuildRequires:	pwlib-devel >= 1.8.4
 BuildRequires:	sed >= 4.0
 BuildRequires:	speex-devel >= 1:1.1.5
 %requires_eq	pwlib
-Requires:	pwlib >= 1.8.4
+Requires:	pwlib >= 1.10.0
 Requires:	speex >= 1:1.1.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
