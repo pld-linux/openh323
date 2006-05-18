@@ -6,7 +6,7 @@ Summary(pl):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.17.1
 %define	fver	%(echo %{version} | tr . _)
-Release:	1
+Release:	4
 License:	MPL 1.0
 Group:		Libraries
 #Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
@@ -19,6 +19,7 @@ Patch2:		%{name}-lib.patch
 Patch3:		%{name}-system-libs.patch
 Patch4:		%{name}-ffmpeg.patch
 Patch5:		%{name}-configure_fix.patch
+Patch6:		%{name}-install64.patch
 URL:		http://www.openh323.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -26,11 +27,11 @@ BuildRequires:	ffmpeg-devel >= 0.4.6
 BuildRequires:	libgsm-devel >= 1.0.10
 BuildRequires:	libstdc++-devel
 BuildRequires:	lpc10-devel >= 1.5
-BuildRequires:	pwlib-devel >= 1.8.4
+BuildRequires:	pwlib-devel >= 1.10.0
 BuildRequires:	sed >= 4.0
 BuildRequires:	speex-devel >= 1:1.1.5
 %requires_eq	pwlib
-Requires:	pwlib >= 1.8.4
+Requires:	pwlib >= 1.10.0
 Requires:	speex >= 1:1.1.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -82,6 +83,9 @@ Biblioteki statyczne OpenH323.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%if "%{_lib}" == "lib64"
+%patch6 -p1
+%endif
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
@@ -112,7 +116,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir}}
 	LIBDIR=$RPM_BUILD_ROOT%{_libdir}
 	
 # using cp as install won't preserve links
-cp -d lib/lib*.a $RPM_BUILD_ROOT%{_libdir}
+cp -d %{_lib}/lib*.a $RPM_BUILD_ROOT%{_libdir}
 install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
 install version.h $RPM_BUILD_ROOT%{_includedir}/%{name}
 sed -i -e 's@\$(OPENH323DIR)/include@&/openh323@' $RPM_BUILD_ROOT%{_datadir}/openh323/openh323u.mak
