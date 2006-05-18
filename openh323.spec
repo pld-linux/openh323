@@ -27,7 +27,7 @@ BuildRequires:	ffmpeg-devel >= 0.4.6
 BuildRequires:	libgsm-devel >= 1.0.10
 BuildRequires:	libstdc++-devel
 BuildRequires:	lpc10-devel >= 1.5
-BuildRequires:	pwlib-devel >= 1.8.4
+BuildRequires:	pwlib-devel >= 1.10.0
 BuildRequires:	sed >= 4.0
 BuildRequires:	speex-devel >= 1:1.1.5
 %requires_eq	pwlib
