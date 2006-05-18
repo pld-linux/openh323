@@ -4,14 +4,14 @@
 Summary:	OpenH323 Library
 Summary(pl):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.17.1
+Version:	1.18.0
 %define	fver	%(echo %{version} | tr . _)
-Release:	4
+Release:	1
 License:	MPL 1.0
 Group:		Libraries
 #Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
 Source0:	http://dl.sourceforge.net/openh323/%{name}-v%{fver}-src-tar.gz
-# Source0-md5:	f335c8d3fc36f1e9bb4846e8dbc2c342
+# Source0-md5:	d7043ba34b5038f0113b099ede0884fb
 #Source0:	http://www.seconix.com/%{name}-%{version}.tar.gz
 Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
@@ -53,7 +53,7 @@ Summary(pl):	Pliki dla developerów OpenH323
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ffmpeg-devel
-Requires:	pwlib-devel >= 1.8.4
+Requires:	pwlib-devel >= 1.10.0
 
 %description devel
 Header files and libraries for developing applications that use
