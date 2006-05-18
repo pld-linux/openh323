@@ -5,7 +5,7 @@ diff -urN openh323.org/src/Makefile openh323/src/Makefile
  # If we're cross compiling, we want the host's asnparser
  # otherwise use the one for the current platform
  ASNPARSE_DIR = $(HOSTPWLIBDIR)/tools/asnparser
--ASNPARSER = $(ASNPARSE_DIR)/obj_$(HOST_PLATFORM_TYPE)_r/asnparser
+-ASNPARSER = $(ASNPARSE_DIR)/obj_$(HOST_PLATFORM_TYPE)_d/asnparser
 +ASNPARSER = $(PWLIBDIR)/bin/asnparser
  
  

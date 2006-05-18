@@ -18,26 +18,15 @@ diff -Naur openh323_v1_17_1.orig/configure.ac openh323_v1_17_1/configure.ac
 diff -Naur openh323_v1_17_1.orig/Makefile.in openh323_v1_17_1/Makefile.in
 --- openh323_v1_17_1.orig/Makefile.in	2004-11-27 19:42:15.000000000 +0100
 +++ openh323_v1_17_1/Makefile.in	2005-05-18 18:27:18.000000000 +0200
-@@ -331,15 +331,13 @@
+@@ -331,7 +331,7 @@
  
  install:
  	mkdir -p $(DESTDIR)$(LIBDIR)
 -	rm -f $(DESTDIR)$(LIBDIR)/libh323_*_r.so*
--	$(INSTALL) -m 444 lib/*_r.so $(DESTDIR)$(LIBDIR)
--	(for fn in lib/*_r.so.* ; do \
 +	rm -f $(DESTDIR)$(LIBDIR)/libopenh323*.so*
-+	$(INSTALL) lib/*.so.*.*.* $(DESTDIR)$(LIBDIR)
-+	(for fn in lib/*.so ; do \
- 		cd $(DESTDIR)$(LIBDIR) ; \
- 		rm -f `basename $$fn` ; \
--		ln -s libh323_*_r.so `basename $$fn` ; \
-+		ln -s libopenh323.so.*.*.* `basename $$fn` ; \
- 	done)
--	$(INSTALL) -m 444 lib/$(OH323_FILE) $(DESTDIR)$(LIBDIR)
--	( cd $(DESTDIR)$(LIBDIR); rm libopenh323.so ; ln -s $(OH323_FILE) libopenh323.so)
- 	( for dir in $(DESTDIR)$(LIBDIR) \
- 		     $(DESTDIR)$(PREFIX)/include/openh323 \
- 		     $(DESTDIR)$(PREFIX)/share/openh323 ;\
+ 	$(INSTALL) -m 444 lib/$(OH323_FILE).@MAJOR_VERSION@.@MINOR_VERSION@.@BUILD_NUMBER@ $(DESTDIR)$(LIBDIR)
+ 	(cd $(DESTDIR)$(LIBDIR) ; \
+ 		rm -f  $(OH323_FILE).@MAJOR_VERSION@.@MINOR_VERSION@ ; \
 diff -Naur openh323_v1_17_1.orig/openh323u.mak.in openh323_v1_17_1/openh323u.mak.in
 --- openh323_v1_17_1.orig/openh323u.mak.in	2005-05-18 18:27:25.000000000 +0200
 +++ openh323_v1_17_1/openh323u.mak.in	2005-05-18 18:27:18.000000000 +0200
