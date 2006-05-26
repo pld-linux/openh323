@@ -1,6 +1,7 @@
 # TODO:
 # - separate plugins to subpackages
 # - gsm-amr plugin (using system amrnb if possible)
+# - use system libilbc or at least use optflags for plugins/audio/iLBC
 #
 %define	fver	%(echo %{version} | tr . _)
 Summary:	OpenH323 Library
