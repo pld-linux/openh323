@@ -1,5 +1,6 @@
 # TODO:
 # - separate plugins to subpackages
+# - gsm-amr plugin (using system amrnb if possible)
 #
 %define	fver	%(echo %{version} | tr . _)
 Summary:	OpenH323 Library
