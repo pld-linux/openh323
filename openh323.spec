@@ -3,7 +3,7 @@
 %define _snapver 02
 
 Summary:	OpenH323 Library
-Summary(pl):	Biblioteka OpenH323
+Summary(pl.UTF-8):   Biblioteka OpenH323
 Name:		openh323
 Version:	1.13.1
 Release:	0.%{_snap}.1
@@ -36,15 +36,15 @@ Open Source implementation of the ITU H.323 teleconferencing protocol
 that can be used by personal developers and commercial users without
 charge.
 
-%description -l pl
-Celem projektu OpenH323 jest stworzenie w pe≥ni funkcjonalnej i
-wyposaøonej implementacji protoko≥u telekonferencyjnego ITU H.323,
-ktÛry moøe byÊ uøywany przez uøytkownikÛw prywatnych i komercyjnych
-bez op≥at.
+%description -l pl.UTF-8
+Celem projektu OpenH323 jest stworzenie w pe≈Çni funkcjonalnej i
+wyposa≈ºonej implementacji protoko≈Çu telekonferencyjnego ITU H.323,
+kt√≥ry mo≈ºe byƒá u≈ºywany przez u≈ºytkownik√≥w prywatnych i komercyjnych
+bez op≈Çat.
 
 %package devel
 Summary:	OpenH323 development files
-Summary(pl):	Pliki dla developerÛw OpenH323
+Summary(pl.UTF-8):   Pliki dla developer√≥w OpenH323
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
 Requires:	ffmpeg-devel
@@ -54,20 +54,20 @@ Requires:	pwlib-devel
 Header files and libraries for developing applications that use
 OpenH323.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe i biblioteki konieczne do rozwoju aplikacji
-uøywaj±cych OpenH323.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe i biblioteki konieczne do rozwoju aplikacji
+u≈ºywajƒÖcych OpenH323.
 
 %package static
 Summary:	OpenH323 static libraries
-Summary(pl):	Biblioteki statyczne OpenH323
+Summary(pl.UTF-8):   Biblioteki statyczne OpenH323
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}
 
 %description static
 OpenH323 static libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteki statyczne OpenH323.
 
 %prep
