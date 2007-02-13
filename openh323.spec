@@ -5,7 +5,7 @@
 #
 %define	fver	%(echo %{version} | tr . _)
 Summary:	OpenH323 Library
-Summary(pl.UTF-8):   Biblioteka OpenH323
+Summary(pl.UTF-8):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.18.0
 Release:	4
@@ -51,7 +51,7 @@ bez opłat.
 
 %package devel
 Summary:	OpenH323 development files
-Summary(pl.UTF-8):   Pliki dla developerów OpenH323
+Summary(pl.UTF-8):	Pliki dla developerów OpenH323
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ffmpeg-devel
@@ -67,7 +67,7 @@ używających OpenH323.
 
 %package static
 Summary:	OpenH323 static libraries
-Summary(pl.UTF-8):   Biblioteki statyczne OpenH323
+Summary(pl.UTF-8):	Biblioteki statyczne OpenH323
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
