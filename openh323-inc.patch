@@ -1,0 +1,11 @@
+diff -urN openh323_v1_18_0.org/include/ixjlid.h openh323_v1_18_0/include/ixjlid.h
+--- openh323_v1_18_0.org/include/ixjlid.h	2006-03-02 12:12:52.000000000 +0100
++++ openh323_v1_18_0/include/ixjlid.h	2007-04-18 23:29:53.477430149 +0200
+@@ -274,7 +274,6 @@
+ 
+ #ifdef P_LINUX
+ #include <linux/telephony.h>
+-#include <linux/compiler.h>
+ #include <linux/ixjuser.h>
+ #endif
+ 
