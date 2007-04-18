@@ -8,7 +8,7 @@ Summary:	OpenH323 Library
 Summary(pl.UTF-8):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.18.0
-Release:	5
+Release:	6
 License:	MPL 1.0
 Group:		Libraries
 #Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
@@ -22,6 +22,7 @@ Patch3:		%{name}-system-libs.patch
 Patch4:		%{name}-ffmpeg.patch
 Patch5:		%{name}-configure_fix.patch
 Patch6:		%{name}-install64.patch
+Patch7:		%{name}-inc.patch
 URL:		http://www.openh323.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -88,6 +89,7 @@ Biblioteki statyczne OpenH323.
 %if "%{_lib}" == "lib64"
 %patch6 -p1
 %endif
+%patch7 -p1
 
 %build
 PWLIBDIR=%{_prefix}; export PWLIBDIR
