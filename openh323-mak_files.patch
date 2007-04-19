@@ -1,6 +1,6 @@
 diff -urN openh323_v1_18_0.org/configure.ac openh323_v1_18_0/configure.ac
 --- openh323_v1_18_0.org/configure.ac	2005-08-30 03:12:38.000000000 +0200
-+++ openh323_v1_18_0/configure.ac	2006-04-13 00:27:51.794727000 +0200
++++ openh323_v1_18_0/configure.ac	2007-04-19 08:09:59.983046709 +0200
 @@ -91,13 +91,6 @@
    PWLIBDIR=`$PTLIB_CONFIG --prefix`
  fi
@@ -17,7 +17,7 @@ diff -urN openh323_v1_18_0.org/configure.ac openh323_v1_18_0/configure.ac
  AC_SUBST(PWLIBDIR)
 diff -urN openh323_v1_18_0.org/Makefile.in openh323_v1_18_0/Makefile.in
 --- openh323_v1_18_0.org/Makefile.in	2005-08-04 21:31:59.000000000 +0200
-+++ openh323_v1_18_0/Makefile.in	2006-04-13 00:29:52.258255500 +0200
++++ openh323_v1_18_0/Makefile.in	2007-04-19 08:09:59.983046709 +0200
 @@ -336,24 +336,13 @@
  
  install:
@@ -52,7 +52,7 @@ diff -urN openh323_v1_18_0.org/Makefile.in openh323_v1_18_0/Makefile.in
  		     $(DESTDIR)$(PREFIX)/share/openh323 ;\
 diff -urN openh323_v1_18_0.org/openh323u.mak.in openh323_v1_18_0/openh323u.mak.in
 --- openh323_v1_18_0.org/openh323u.mak.in	2005-01-03 07:25:51.000000000 +0100
-+++ openh323_v1_18_0/openh323u.mak.in	2006-04-13 00:27:51.798727250 +0200
++++ openh323_v1_18_0/openh323u.mak.in	2007-04-19 08:11:04.952212183 +0200
 @@ -163,9 +163,11 @@
  #
  
@@ -82,16 +82,24 @@ diff -urN openh323_v1_18_0.org/openh323u.mak.in openh323_v1_18_0/openh323u.mak.i
  endif # LIBRARY_MAKEFILE
  
  LIBDIRS += $(OPENH323DIR)
-@@ -204,7 +206,7 @@
- endif # PREFIX
+@@ -197,14 +199,10 @@
+ #OH323_SUPPRESS_H235	= 1
+ 
+ OH323_SRCDIR = $(OPENH323DIR)/src
+-ifdef PREFIX
+-OH323_INCDIR = $(PREFIX)/include/openh323
+-else
+-OH323_INCDIR = $(OPENH323DIR)/include
+-endif # PREFIX
++OH323_INCDIR = /usr/include/openh323
  
  ifndef OH323_LIBDIR
 -OH323_LIBDIR = $(OPENH323DIR)/lib
-+OH323_LIBDIR = $(subst $(PWLIBDIR),$(OPENH323DIR),$(PW_LIBDIR))
++OH323_LIBDIR = $(OPENH323DIR)/lib
  endif # OH323_LIBDIR
  
  ifeq ($(NOTRACE), 1)
-@@ -216,7 +218,7 @@
+@@ -216,7 +214,7 @@
  OH323_SUFFIX = $(OBJ_SUFFIX)
  endif # NOTRACE
  
@@ -100,7 +108,7 @@ diff -urN openh323_v1_18_0.org/openh323u.mak.in openh323_v1_18_0/openh323u.mak.i
  OH323_FILE  = lib$(OH323_BASE).$(LIB_SUFFIX)
  
  LDFLAGS	    += -L$(OH323_LIBDIR)
-@@ -271,6 +273,7 @@
+@@ -271,6 +269,7 @@
  
  $(TARGET) :	$(OH323_LIBDIR)/$(OH323_FILE)
  
@@ -108,7 +116,7 @@ diff -urN openh323_v1_18_0.org/openh323u.mak.in openh323_v1_18_0/openh323u.mak.i
  ifndef LIBRARY_MAKEFILE
  ifdef DEBUG
  $(OH323_LIBDIR)/$(OH323_FILE):
-@@ -280,6 +283,7 @@
+@@ -280,6 +279,7 @@
  	$(MAKE) -C $(OH323_SRCDIR) opt
  endif # DEBUG
  endif # LIBRARY_MAKEFILE
@@ -118,7 +126,7 @@ diff -urN openh323_v1_18_0.org/openh323u.mak.in openh323_v1_18_0/openh323u.mak.i
  
 diff -urN openh323_v1_18_0.org/src/Makefile openh323_v1_18_0/src/Makefile
 --- openh323_v1_18_0.org/src/Makefile	2005-06-07 09:59:11.000000000 +0200
-+++ openh323_v1_18_0/src/Makefile	2006-04-13 00:27:51.798727250 +0200
++++ openh323_v1_18_0/src/Makefile	2007-04-19 08:09:59.983046709 +0200
 @@ -379,7 +379,7 @@
  
  ####################################################
@@ -137,4 +145,3 @@ diff -urN openh323_v1_18_0.org/src/Makefile openh323_v1_18_0/src/Makefile
  
  ####################################################
  
-
