@@ -8,7 +8,7 @@ Summary:	OpenH323 Library
 Summary(pl.UTF-8):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.18.0
-Release:	6
+Release:	8
 License:	MPL 1.0
 Group:		Libraries
 #Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
@@ -88,6 +88,7 @@ Biblioteki statyczne OpenH323.
 %patch5 -p1
 %if "%{_lib}" == "lib64"
 %patch6 -p1
+sed -i -e 's#/lib#/lib64#g' openh323u.mak.in
 %endif
 %patch7 -p1
 
@@ -123,7 +124,9 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir}}
 cp -d %{_lib}/lib*.a $RPM_BUILD_ROOT%{_libdir}
 install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
 install version.h $RPM_BUILD_ROOT%{_includedir}/%{name}
-sed -i -e 's@\$(OPENH323DIR)/include@&/openh323@' $RPM_BUILD_ROOT%{_datadir}/openh323/openh323u.mak
+
+sed -i -e 's#OH323_INCDIR = .*#OH323_INCDIR = %{_includedir}/%{name}#g' $RPM_BUILD_ROOT%{_datadir}/%{name}/*.mak
+sed -i -e 's#OH323_LIBDIR = .*#OH323_LIBDIR = %{_libdir}#g' $RPM_BUILD_ROOT%{_datadir}/%{name}/*.mak
 
 %clean
 rm -rf $RPM_BUILD_ROOT
