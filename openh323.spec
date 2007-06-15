@@ -11,8 +11,7 @@ Version:	1.18.0
 Release:	8
 License:	MPL 1.0
 Group:		Libraries
-#Source0:	http://www.openh323.org/bin/%{name}_%{version}.tar.gz
-Source0:	http://dl.sourceforge.net/openh323/%{name}-v%{fver}-src-tar.gz
+Source0:	http://www.voxgratia.org/releases/%{name}-v%{fver}-src-tar.gz
 # Source0-md5:	d7043ba34b5038f0113b099ede0884fb
 #Source0:	http://www.seconix.com/%{name}-%{version}.tar.gz
 Patch0:		%{name}-mak_files.patch
@@ -23,7 +22,7 @@ Patch4:		%{name}-ffmpeg.patch
 Patch5:		%{name}-configure_fix.patch
 Patch6:		%{name}-install64.patch
 Patch7:		%{name}-inc.patch
-URL:		http://www.openh323.org/
+URL:		http://www.voxgratia.org/		
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	ffmpeg-devel >= 0.4.6
