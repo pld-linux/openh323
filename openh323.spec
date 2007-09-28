@@ -8,7 +8,7 @@ Summary:	OpenH323 Library
 Summary(pl.UTF-8):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.18.0
-Release:	8
+Release:	9
 License:	MPL 1.0
 Group:		Libraries
 Source0:	http://www.voxgratia.org/releases/%{name}-v%{fver}-src-tar.gz
