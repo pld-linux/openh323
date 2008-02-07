@@ -8,7 +8,7 @@ Summary:	OpenH323 Library
 Summary(pl.UTF-8):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.18.0
-Release:	9
+Release:	10
 License:	MPL 1.0
 Group:		Libraries
 Source0:	http://www.voxgratia.org/releases/%{name}-v%{fver}-src-tar.gz
@@ -22,7 +22,7 @@ Patch4:		%{name}-ffmpeg.patch
 Patch5:		%{name}-configure_fix.patch
 Patch6:		%{name}-install64.patch
 Patch7:		%{name}-inc.patch
-URL:		http://www.voxgratia.org/		
+URL:		http://www.voxgratia.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	ffmpeg-devel >= 0.4.6
