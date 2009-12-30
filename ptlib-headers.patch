@@ -31,3 +31,13 @@
  
  #ifdef __GNUC__
  #pragma implementation "h261codec.h"
+--- openh323_v1_19_0_1/samples/simple/main.h~	2001-11-01 03:35:25.000000000 +0200
++++ openh323_v1_19_0_1/samples/simple/main.h	2009-12-30 18:58:27.114012192 +0200
+@@ -56,6 +56,7 @@
+ #define _SimpleH323_MAIN_H
+ 
+ #include <h323.h>
++#include <ptlib/sound.h>
+ 
+ 
+ class SimpleH323EndPoint : public H323EndPoint
