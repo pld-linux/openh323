@@ -1,0 +1,18 @@
+--- openh323_v1_19_0_1/configure.ac	2009-12-30 18:27:19.040032357 +0200
++++ openh323_v1_19_0_1/configure.ac	2009-12-30 18:36:41.306850906 +0200
+@@ -88,11 +88,11 @@
+ 
+ echo "PWLib prefix set to.... $PWLIBDIR"
+ 
+-if test "${PWLIBDIR:-unset}" = "unset" ; then
++if test "${PTLIB_CONFIG:-unset}" != "unset" ; then
+   PWVERSION=`$PTLIB_CONFIG --version`
+-  PW_MAJOR_VERSION=`echo $PW_VERSION | cut -d'.' -f1`
+-  PW_MINOR_VERSION=`echo $PW_VERSION | cut -d'.' -f2`
+-  PW_BUILD_NUMBER=`echo $PW_VERSION | cut -d'.' -f3`
++  PW_MAJOR_VERSION=`echo $PWVERSION | cut -d'.' -f1`
++  PW_MINOR_VERSION=`echo $PWVERSION | cut -d'.' -f2`
++  PW_BUILD_NUMBER=`echo $PWVERSION | cut -d'.' -f3`
+   
+ else
+   PW_MAJOR_VERSION=`cat ${PWLIBDIR}/version.h | grep MAJOR_VERSION | cut -f3 -d' '`
