@@ -1,4 +1,3 @@
-diff -urN openh323_v1_18_0.org/plugins/audio/GSM0610/gsm06_10_codec.c openh323_v1_18_0/plugins/audio/GSM0610/gsm06_10_codec.c
 --- openh323_v1_18_0.org/plugins/audio/GSM0610/gsm06_10_codec.c	2005-07-15 12:08:59.000000000 +0200
 +++ openh323_v1_18_0/plugins/audio/GSM0610/gsm06_10_codec.c	2006-04-13 00:33:28.879793500 +0200
 @@ -79,7 +79,7 @@
@@ -10,7 +9,6 @@ diff -urN openh323_v1_18_0.org/plugins/audio/GSM0610/gsm06_10_codec.c openh323_v
  
  #define	BITS_PER_SECOND         13200
  
-diff -urN openh323_v1_18_0.org/plugins/audio/GSM0610/Makefile.in openh323_v1_18_0/plugins/audio/GSM0610/Makefile.in
 --- openh323_v1_18_0.org/plugins/audio/GSM0610/Makefile.in	2006-02-20 09:55:03.000000000 +0100
 +++ openh323_v1_18_0/plugins/audio/GSM0610/Makefile.in	2006-04-13 00:33:57.113558000 +0200
 @@ -63,7 +63,7 @@
@@ -22,33 +20,6 @@ diff -urN openh323_v1_18_0.org/plugins/audio/GSM0610/Makefile.in openh323_v1_18_
  H323_EMBEDDED_GSM=@H323_EMBEDDED_GSM@
  
  CC=@CC@
-@@ -82,7 +82,7 @@
- 
- SRCS	+= gsm06_10_codec.c
- 
--#ifeq ($(H323_SYSTEM_GSM),0)
-+ifeq ($(H323_SYSTEM_GSM),0)
- 
- SRCS	+= $(SRCDIR)/gsm_create.c \
-            $(SRCDIR)/gsm_destroy.c \
-@@ -101,11 +101,11 @@
- 
- EXTRALIBS = 
- 
--#else
--#
--#EXTRALIBS = -lgsm
--#
--#endif
-+else
-+
-+EXTRALIBS = -lgsm
-+
-+endif
- 
- vpath	%.o $(OBJDIR)
- vpath	%.c $(SRCDIR)
-diff -urN openh323_v1_18_0.org/plugins/audio/LPC_10/lpc_10_codec.c openh323_v1_18_0/plugins/audio/LPC_10/lpc_10_codec.c
 --- openh323_v1_18_0.org/plugins/audio/LPC_10/lpc_10_codec.c	2005-07-15 12:09:00.000000000 +0200
 +++ openh323_v1_18_0/plugins/audio/LPC_10/lpc_10_codec.c	2006-04-13 00:33:28.883793750 +0200
 @@ -44,7 +44,7 @@
@@ -60,7 +31,6 @@ diff -urN openh323_v1_18_0.org/plugins/audio/LPC_10/lpc_10_codec.c openh323_v1_1
  
  PLUGIN_CODEC_IMPLEMENT("LPC 10")
  
-diff -urN openh323_v1_18_0.org/plugins/audio/LPC_10/Makefile.in openh323_v1_18_0/plugins/audio/LPC_10/Makefile.in
 --- openh323_v1_18_0.org/plugins/audio/LPC_10/Makefile.in	2004-08-22 06:20:19.000000000 +0200
 +++ openh323_v1_18_0/plugins/audio/LPC_10/Makefile.in	2006-04-13 00:33:28.883793750 +0200
 @@ -52,41 +52,8 @@
@@ -107,7 +77,6 @@ diff -urN openh323_v1_18_0.org/plugins/audio/LPC_10/Makefile.in openh323_v1_18_0
  
  vpath	%.o $(OBJDIR)
  vpath	%.c $(SRCDIR)
-diff -urN openh323_v1_18_0.org/plugins/audio/Speex/speexcodec.cxx openh323_v1_18_0/plugins/audio/Speex/speexcodec.cxx
 --- openh323_v1_18_0.org/plugins/audio/Speex/speexcodec.cxx	2005-08-15 03:57:13.000000000 +0200
 +++ openh323_v1_18_0/plugins/audio/Speex/speexcodec.cxx	2006-04-13 00:33:28.883793750 +0200
 @@ -88,7 +88,7 @@

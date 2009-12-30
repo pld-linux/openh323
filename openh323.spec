@@ -2,18 +2,18 @@
 # - separate plugins to subpackages
 # - gsm-amr plugin (using system amrnb if possible)
 # - use system libilbc or at least use optflags for plugins/audio/iLBC
-#
-%define	fver	%(echo %{version} | tr . _)
+# - links with -losptk but no BR
+
+%define		fver	%(echo %{version} | tr . _)
 Summary:	OpenH323 Library
 Summary(pl.UTF-8):	Biblioteka OpenH323
 Name:		openh323
-Version:	1.18.0
-Release:	10
+Version:	1.19.0.1
+Release:	0.1
 License:	MPL 1.0
 Group:		Libraries
 Source0:	http://www.voxgratia.org/releases/%{name}-v%{fver}-src-tar.gz
-# Source0-md5:	d7043ba34b5038f0113b099ede0884fb
-#Source0:	http://www.seconix.com/%{name}-%{version}.tar.gz
+# Source0-md5:	e7ba3ae6b50d0d02c5cbe9ed3a3152c4
 Patch0:		%{name}-mak_files.patch
 Patch1:		%{name}-asnparser.patch
 Patch2:		%{name}-lib.patch
@@ -22,6 +22,8 @@ Patch4:		%{name}-ffmpeg.patch
 Patch5:		%{name}-configure_fix.patch
 Patch6:		%{name}-install64.patch
 Patch7:		%{name}-inc.patch
+Patch8:		ptlib-check.patch
+Patch9:		ptlib-headers.patch
 URL:		http://www.voxgratia.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -32,8 +34,6 @@ BuildRequires:	lpc10-devel >= 1.5
 BuildRequires:	pwlib-devel >= 1.10.0
 BuildRequires:	sed >= 4.0
 BuildRequires:	speex-devel >= 1:1.1.5
-%requires_eq	pwlib
-Requires:	pwlib >= 1.10.0
 Requires:	speex >= 1:1.1.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -90,25 +90,21 @@ Biblioteki statyczne OpenH323.
 sed -i -e 's#/lib#/lib64#g' openh323u.mak.in
 %endif
 %patch7 -p1
+%patch8 -p1
+%patch9 -p1
 
 %build
-PWLIBDIR=%{_prefix}; export PWLIBDIR
-OPENH323DIR=`pwd`; export OPENH323DIR
-OPENH323_BUILD="yes"; export OPENH323_BUILD
+export OPENH323DIR=${PWD:-$(pwd)}
+export OPENH323_BUILD="yes"
 cp -f /usr/share/automake/config.sub .
 %{__autoconf}
 %configure \
 	--enable-localspeex=no \
 	--enable-plugins
 
-%{__make} %{?debug:debugshared}%{!?debug:optshared} \
+%{__make} %{?debug:debug}%{!?debug:opt}shared apps \
 	CC="%{__cc}" \
 	CPLUS="%{__cxx}" \
-	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
-
-%{__make} -C samples/simple %{?debug:debugshared}%{!?debug:optshared} \
-	CC="%{__cc}" \
-	CPLUS=%{__cxx} \
 	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
 
 %install
@@ -120,9 +116,9 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir}}
 	LIBDIR=$RPM_BUILD_ROOT%{_libdir}
 
 # using cp as install won't preserve links
-cp -d %{_lib}/lib*.a $RPM_BUILD_ROOT%{_libdir}
-install samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
-install version.h $RPM_BUILD_ROOT%{_includedir}/%{name}
+cp -pd %{_lib}/lib*.a $RPM_BUILD_ROOT%{_libdir}
+cp -a samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
+cp -a version.h $RPM_BUILD_ROOT%{_includedir}/%{name}
 
 sed -i -e 's#OH323_INCDIR = .*#OH323_INCDIR = %{_includedir}/%{name}#g' $RPM_BUILD_ROOT%{_datadir}/%{name}/*.mak
 sed -i -e 's#OH323_LIBDIR = .*#OH323_LIBDIR = %{_libdir}#g' $RPM_BUILD_ROOT%{_datadir}/%{name}/*.mak
