@@ -8,3 +8,16 @@
  
  #ifdef __GNUC__
  #pragma implementation "h323ep.h"
+--- openh323_v1_19_0_1/include/h4601.h~	2006-06-08 16:26:16.000000000 +0300
++++ openh323_v1_19_0_1/include/h4601.h	2009-12-30 18:47:51.213871071 +0200
+@@ -61,9 +61,9 @@
+ 
+ #include "h225.h"
+ #include "transports.h"
++#include <ptlib/pluginmgr.h>
+ #include <ptclib/url.h>
+ 
+-
+ #ifdef _MSC_VER
+ #pragma warning(disable:4100)
+ #endif
