@@ -21,3 +21,13 @@
  #ifdef _MSC_VER
  #pragma warning(disable:4100)
  #endif
+--- openh323_v1_19_0_1/src/h261codec.cxx~	2006-06-06 11:05:40.000000000 +0300
++++ openh323_v1_19_0_1/src/h261codec.cxx	2009-12-30 18:49:05.423265009 +0200
+@@ -267,6 +267,7 @@
+  */
+ 
+ #include <ptlib.h>
++#include <ptlib/video.h>
+ 
+ #ifdef __GNUC__
+ #pragma implementation "h261codec.h"
