@@ -1,15 +1,21 @@
+#
+# Conditional build:
+%bcond_with	transnexusosp	# support for the Transnexus OSP toolkit (huge static lib)
+
 # TODO:
 # - separate plugins to subpackages
 # - gsm-amr plugin (using system amrnb if possible)
 # - use system libilbc or at least use optflags for plugins/audio/iLBC
-# - links with -losptk but no BR
+# - configure: Skipping tests for RFC 2190 H.263 support
+# - configure: Disabled non-RFC2190 H.263 using ffmpeg
+# - configure: Disabled H.263 using VIC
 
 %define		fver	%(echo %{version} | tr . _)
 Summary:	OpenH323 Library
 Summary(pl.UTF-8):	Biblioteka OpenH323
 Name:		openh323
 Version:	1.19.0.1
-Release:	0.1
+Release:	0.2
 License:	MPL 1.0
 Group:		Libraries
 Source0:	http://www.voxgratia.org/releases/%{name}-v%{fver}-src-tar.gz
@@ -32,6 +38,7 @@ BuildRequires:	libgsm-devel >= 1.0.10
 BuildRequires:	libstdc++-devel
 BuildRequires:	lpc10-devel >= 1.5
 BuildRequires:	pwlib-devel >= 1.10.0
+%{?with_transnexusosp:BuildRequires:	OSPToolkit}
 BuildRequires:	sed >= 4.0
 BuildRequires:	speex-devel >= 1:1.1.5
 Requires:	speex >= 1:1.1.5
@@ -100,6 +107,7 @@ cp -f /usr/share/automake/config.sub .
 %{__autoconf}
 %configure \
 	--enable-localspeex=no \
+	%{!?with_transnexusosp:--disable-transnexusosp} \
 	--enable-plugins
 
 %{__make} %{?debug:debug}%{!?debug:opt}shared apps \
@@ -117,7 +125,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir}}
 
 # using cp as install won't preserve links
 cp -pd %{_lib}/lib*.a $RPM_BUILD_ROOT%{_libdir}
-cp -a samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
+install -p samples/simple/obj_*/simph323 $RPM_BUILD_ROOT%{_bindir}
 cp -a version.h $RPM_BUILD_ROOT%{_includedir}/%{name}
 
 sed -i -e 's#OH323_INCDIR = .*#OH323_INCDIR = %{_includedir}/%{name}#g' $RPM_BUILD_ROOT%{_datadir}/%{name}/*.mak
