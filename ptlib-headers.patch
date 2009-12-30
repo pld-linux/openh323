@@ -1,0 +1,10 @@
+--- openh323_v1_19_0_1/src/h323ep.cxx~	2006-06-09 09:30:12.000000000 +0300
++++ openh323_v1_19_0_1/src/h323ep.cxx	2009-12-30 18:44:52.629931919 +0200
+@@ -765,6 +765,7 @@
+  */
+ 
+ #include <ptlib.h>
++#include <ptlib/sound.h>
+ 
+ #ifdef __GNUC__
+ #pragma implementation "h323ep.h"
