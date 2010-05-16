@@ -110,7 +110,7 @@ cp -f /usr/share/automake/config.sub .
 	%{!?with_transnexusosp:--disable-transnexusosp} \
 	--enable-plugins
 
-%{__make} %{?debug:debug}%{!?debug:opt}shared apps \
+%{__make} -j1 %{?debug:debug}%{!?debug:opt}shared apps \
 	CC="%{__cc}" \
 	CPLUS="%{__cxx}" \
 	OPTCCFLAGS="%{rpmcflags} %{!?debug:-DNDEBUG}"
@@ -119,7 +119,7 @@ cp -f /usr/share/automake/config.sub .
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir}}
 
-%{__make} install \
+%{__make} -j1 install \
 	PREFIX=$RPM_BUILD_ROOT%{_prefix} \
 	LIBDIR=$RPM_BUILD_ROOT%{_libdir}
 
